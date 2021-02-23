@@ -17,6 +17,16 @@ const routes = [
     component: () => import('../components/usuario/CreateUserComponent')
   },
   {
+    path: '/registrar',
+    name: 'registrar',
+    component: () => import('../components/usuario/Registrar.vue')
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../components/usuario/Login.vue')
+  },
+  {
     path: '/view',
     name: 'view',
     component: () => import('../components/usuario/ListaUsuarios')
