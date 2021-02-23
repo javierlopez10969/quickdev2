@@ -22,7 +22,7 @@
                         <button class="btn btn-lg color4 rounded-pill text-center" type="submit">Ingresar</button>
 
                     </form>
-                    <p class="text-center mt-lg-5">¿No tienes Cuenta?  <a href="/register">Registrate aquí</a> </p>  
+                    <p class="text-center mt-lg-5">¿No tienes Cuenta?  <a href="/registrar">Registrate aquí</a> </p>  
 
                     <div class = "end-100 bottom">
                         <p class="padding_up text-muted ">QuickDev - Transformación Digital - 2021</p>

@@ -1,42 +1,23 @@
-<template>
-  <div class="text-center">
-    <b-spinner label="Spinning"></b-spinner>
-    <b-spinner type="grow" label="Spinning"></b-spinner>
-    <b-spinner variant="primary" label="Spinning"></b-spinner>
-    <b-spinner variant="primary" type="grow" label="Spinning"></b-spinner>
-    <b-spinner variant="danger" label="Spinning"></b-spinner>
-    <b-spinner variant="danger" type="grow" label="Spinning"></b-spinner>
+<template >
+Hello world
 
-
-    HELLOO WORLD
-    <!-- Footer -->
-  <mdb-footer color="blue" class="font-small pt-4 mt-4">
-    <mdb-container class="text-left">
-      <mdb-row>
-        <mdb-col sm="6">
-          <h5 class="title">Footer Content</h5>
-          <p>Here you can use rows and columns here to organize your footer content.</p>
-        </mdb-col>
-        <mdb-col sm="6">
-          <h5 class="title">Links</h5>
-          <ul>
-            <li class="list-unstyled"><a href="#!">Link 1</a></li>
-            <li class="list-unstyled"><a href="#!">Link 2</a></li>
-            <li class="list-unstyled"><a href="#!">Link 3</a></li>
-            <li class="list-unstyled"><a href="#!">Link 4</a></li>
-          </ul>
-        </mdb-col>
-      </mdb-row>
-    </mdb-container>
-    <div class="footer-copyright text-center py-3">
-      <mdb-container fluid>
-        &copy; 2020 Copyright: <a href="https://www.MDBootstrap.com"> MDBootstrap.com </a>
-      </mdb-container>
-    </div>
-  </mdb-footer>
-  <!-- Footer -->
-
-
-
-  </div>  
 </template>
+
+<style>
+  
+  body, html {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+  }
+  body {
+    background: linear-gradient(180deg, #736CED -7.87%, rgba(255, 255, 255, 0) 20%),
+                linear-gradient(0deg, #736CED -12.07%, rgba(255, 255, 255, 0) 20%),
+                #FEF9FF;;
+  }
+  
+  .fondo{
+    background-color: red;
+  }
+</style>
