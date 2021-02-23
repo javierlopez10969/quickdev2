@@ -6,6 +6,16 @@ const faker = require('faker');
 // Modelo de usuario
 let userModel = require('../models/User');
 
+//GET para mostrar usuarios
+userRoute.route('/users').get((req, res) => {
+  userModel.find((error, data) => {
+   if (error) {
+     return next(error)
+   } else {
+     res.json(data)
+   }
+ })
+})
  userRoute.route('/create-user').post((req, res, next) => {
     userModel.create(req.body, (error, data) => {
     if (error) {

@@ -12,12 +12,12 @@ const routes = [
   {
     path: '/view',
     name: 'view',
-    component: () => import('../components/ListComponent')
+    component: () => import('../components/ListaUsuarios')
   },
   {
     path: '/edit/:id',
     name: 'edit',
-    component: () => import('../components/EditComponent')
+    component: () => import('../components/EditarUsuario')
   }
 ]
 

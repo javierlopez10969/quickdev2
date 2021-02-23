@@ -5,21 +5,31 @@
             <form @submit.prevent="handleSubmitForm">
                 <div class="form-group">
                     <label>Nombre</label>
-                    <input type="text" class="form-control" v-model="user.name" required>
+                    <input type="text" class="form-control rounded-pill" v-model="user.name" required>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group ">
                     <label>Correo </label>
-                    <input type="email" class="form-control" v-model="user.email" required>
+                    <input type="email" class="form-control rounded-pill" v-model="user.email" required>
                 </div>
 
-                <div class="form-group">
-                    <label>Phone</label>
-                    <input type="text" class="form-control" v-model="user.phone" required>
+                <div class="form-group ">
+                    <label>Teléfono </label>
+                    <input type="text" class="form-control rounded-pill" v-model="user.phone" required>
+                </div>
+                <label>Género </label>
+                <div class="form-group input-group rounded-pill">
+                    
+                    <select class="form-control rounded-pill " v-model="user.gender" required placeholder="Seleccionar tipo de prec" >
+                        <option>Hombre</option>
+                        <option>Mujer</option>
+                        <option>Haitiano</option>
+                    </select>
                 </div>
 
+
                 <div class="form-group">
-                    <button class="btn btn-danger btn-block">Crear</button>
+                    <button class="btn btn-danger btn-block rounded-pill">Crear</button>
                 </div>
             </form>
         </div>

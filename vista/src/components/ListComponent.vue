@@ -37,7 +37,7 @@
             }
         },
         created() {
-            let apiURL = 'http://localhost:3000/api';
+            let apiURL = 'http://localhost:3000/api/';
             axios.get(apiURL).then(res => {
                 this.Students = res.data;
             }).catch(error => {
