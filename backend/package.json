@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev" : "nodemon server.js"
+    "dev": "nodemon server.js"
   },
   "author": "QuickDev",
   "license": "ISC",
@@ -13,6 +13,7 @@
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "faker": "^5.4.0",
     "mongoose": "^5.11.17",
     "nodemon": "^2.0.7"
   }

@@ -3,13 +3,13 @@
     <!-- Nav bar -->
     <nav class="navbar navbar-dark bg-primary justify-content-between flex-nowrap flex-row">
       <div class="container">
-        <a class="navbar-brand float-left">MEVN Stack Example | LaravelCode</a>
+        <a class="navbar-brand float-left">Transformación digital | QuickDev</a>
         <ul class="nav navbar-nav flex-row float-right">
           <li class="nav-item">
-            <router-link class="nav-link pr-3" to="/">Create Student</router-link>
+            <router-link class="nav-link pr-3" to="/">Crear usuario</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/view">View Students</router-link>
+            <router-link class="nav-link" to="/view">Ver usuarios</router-link>
           </li>
         </ul>
       </div>

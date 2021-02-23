@@ -5,8 +5,11 @@ const express = require('express'),
   database = require('./database'),
   bodyParser = require('body-parser');
 
+//RUTAS
+const studentAPI = require('../backend/routes/student.route');
+const userAPI = require('../backend/routes/user.route');
 
-const studentAPI = require('../backend/routes/student.route')
+
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -16,6 +19,7 @@ app.use(cors());
 
 // API
 app.use('/api', studentAPI)
+app.use('/api', userAPI)
 
 // Create port
 const port = process.env.PORT || 3000;

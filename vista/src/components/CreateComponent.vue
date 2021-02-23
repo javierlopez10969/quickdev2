@@ -1,7 +1,7 @@
 <template>
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <h3 class="text-center">Create Student</h3>
+            <h3 class="text-center">Crear usuario</h3>
             <form @submit.prevent="handleSubmitForm">
                 <div class="form-group">
                     <label>Name</label>
@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button class="btn btn-danger btn-block">Create</button>
+                    <button class="btn btn-danger btn-block">Crear</button>
                 </div>
             </form>
         </div>
