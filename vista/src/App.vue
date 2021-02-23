@@ -1,6 +1,8 @@
 <template>
   <div>
-    <!-- Nav bar -->
+    <!-- NavBar component real -->
+    <Navbar></Navbar>
+    
     <nav class="navbar navbar-dark color1 justify-content-between flex-nowrap flex-row">
       <div class="container-fluid">
         <a class="navbar-brand float-left " href="/">Transformación digital | QuickDev</a>
@@ -36,6 +38,16 @@
 
 </template>
 
+<script>
+import Navbar from './components/General/Navbar.vue'
+
+export default {
+  name: 'App',
+  components: {
+    Navbar
+  }
+}
+</script>
 
 <style>
   .color1{
