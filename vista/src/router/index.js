@@ -3,22 +3,32 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+
 const routes = [
+  //Primera pagina
   {
     path: '/',
     name: 'home',
-    component: () => import('../components/CreateUserComponent')
+    component: () => import('../components/home/Home')
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: () => import('../components/usuario/CreateUserComponent')
   },
   {
     path: '/view',
     name: 'view',
-    component: () => import('../components/ListaUsuarios')
+    component: () => import('../components/usuario/ListaUsuarios')
   },
   {
     path: '/edit/:id',
     name: 'edit',
-    component: () => import('../components/EditarUsuario')
+    component: () => import('../components/usuario/EditarUsuario')
   }
+
+
+  
 ]
 
 const router = new VueRouter({

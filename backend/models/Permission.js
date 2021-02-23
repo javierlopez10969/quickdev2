@@ -1,7 +1,7 @@
 // Permission.js
 const mongoose = require('mongoose');
 // Setup schema
-const rolSchema = mongoose.Schema({
+const permissionSchema = mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -14,4 +14,4 @@ const rolSchema = mongoose.Schema({
     
 });
 // Export rol model
-var Permiso = module.exports = mongoose.model('Permission', userSchema);
+module.exports = mongoose.model('Permission', permissionSchema);

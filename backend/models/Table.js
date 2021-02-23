@@ -1,7 +1,8 @@
-// Rol.js
+// Table.js
+// Modelo de tablon de anuncios
 const mongoose = require('mongoose');
 // Setup schema
-let rolSchema = mongoose.Schema({
+const tableSchema = mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -14,4 +15,4 @@ let rolSchema = mongoose.Schema({
     
 });
 // Export rol model
-module.exports = mongoose.model('Rol', rolSchema);
+module.exports = mongoose.model('Table', tableSchema);
