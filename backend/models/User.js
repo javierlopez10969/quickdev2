@@ -11,6 +11,7 @@ const roles = {
 
 // Setup schema
 let userSchema = mongoose.Schema({
+    username:{type: String,required: [true, 'El nombre es necesario']},
     name:{type: String,required: [true, 'El nombre es necesario'] },
     email:{type: String,required: [true, 'La contraseña es necesaria'] },
     pass:{type: String, required: [true, 'Pass es necesario'] },

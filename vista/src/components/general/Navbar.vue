@@ -15,7 +15,7 @@
                     <a class="nav-link" href="/view">Usuarios registrados</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="#">Link 2</a>
+                    <a class="nav-link" href="https://github.com/javierlopez10969/quickdev2.git">Proyecto en GitHub</a>
                     </li>
                     <li class="nav-item">
                     <a class="nav-link" href="#">Link 3</a>

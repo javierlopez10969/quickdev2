@@ -2,32 +2,6 @@
   <div>
     <!-- NavBar component real -->
     <Navbar></Navbar>
-    <!--
-    <nav class="navbar navbar-dark color1 justify-content-between flex-nowrap flex-row">
-      <div class="container-fluid">
-        <a class="navbar-brand float-left " href="/">Transformación digital | QuickDev</a>
-        <ul class="nav navbar-nav flex-row float-right">
-          
-          <li class="nav-item">
-            <router-link class="nav-link pr-3" to="/">Crear usuario</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/view">Ver usuarios</router-link>
-          </li>
-     
-
-          <b-button class = "rounded-pill color2 margen"  href="#">Iniciar Sesión</b-button>
-          <b-button class = "rounded-pill color2 margen" href="/register">Registrarse</b-button>
-
-          <loading-button ref="successLoadingButton" @click="click('successLoadingButton')" variant="success">Pay Now</loading-button>
-
-
-        </ul>
-      </div>
-    </nav>
-    -->
-
-    <!-- Router view -->
     <div class="container mt-5">
       <router-view></router-view>
     </div>

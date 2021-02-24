@@ -1,9 +1,20 @@
 <template>
     <div>
 
+
     <div class="container-fluid text-center">
         <div class="col">
         </div>
+
+            <div id="msg"></div>
+ 
+            <!-- Mensajes de Verificación -->
+            <div id="error" class="alert alert-danger ocultar" role="alert">
+                Las Contraseñas no coinciden, vuelve a intentar !
+            </div>
+            <div id="ok" class="alert alert-success ocultar" role="alert">
+                Las Contraseñas coinciden ! (Procesando formulario ... )
+            </div>
 
             <div class="col ">
                 <div class="container-fluid ventana">
@@ -13,6 +24,9 @@
                     <article class="card-body mx-auto" style="max-width: 400px;">
                         <h4 class="card-title text-center">Crear cuenta</h4>
                         <form @submit.prevent="handleSubmitForm">
+                        <div class="form-group input-group">
+                            <input name="" class="form-control rounded-pill" placeholder="Nombre de usuario" type="text" v-model="user.username" required>
+                        </div> 
                         <div class="form-group input-group">
                             <input name="" class="form-control rounded-pill" placeholder="Nombre" type="text" v-model="user.name" required>
                         </div> 
@@ -35,16 +49,16 @@
                             </select>
                         </div>
                         <div class="form-group input-group">
-                            <input class="form-control rounded-pill" placeholder="Contraseña" type="password" v-model="user.pass" required id="password">
+                            <input class="form-control rounded-pill" placeholder="Contraseña" type="password" v-model="user.pass" required id="password1">
                         </div> 
                         <div class="form-group input-group">
-                            <input class="form-control rounded-pill" placeholder="Repetir contraseña" type="password"  required oninput="check(this)">
+                            <input class="form-control rounded-pill" placeholder="Repetir contraseña" type="password" v-model="pass"  required id="password1" @change="checkPassword" >
                         </div>                                      
                         <div class="form-group text-center">
-                            <button class="btn btn-lg color4 rounded-pill" type="submit">Crear cuenta</button>
+                            <button class="btn btn-lg color4 rounded-pill" type="submit" disabled="disabled == true">Crear cuenta</button>
                         </div>     
                         <p class="text-center">¿Ya tienes cuenta?  <a href="/login">Inicia sesión aquí</a> </p>                                                                 
-                    </form>
+                        </form>
                     <div class = "end-100 bottom text-center padding_up">
                         <p class="padding_up text-muted "> QuickDev - Transformación Digital - 2021</p>
                     </div> 
@@ -61,6 +75,78 @@
     </div>
 </template>
 
+
+<script>
+
+    import axios from "axios";
+
+    export default {
+        data() {
+            return {
+                user: {
+                   username: '', 
+                   name: '',
+                   email: '',
+                   gender: '',
+                   phone: '',
+                   pass: '',
+                },
+                pass: '',
+                disabled : false
+
+            }
+        },
+        computed: {
+            fullName: function () {
+                return this.firstName + ' ' + this.lastName
+            }
+        },
+        methods: {
+            handleSubmitForm() {
+                let apiURL = 'http://localhost:3000/api/registrar';
+                
+                axios.post(apiURL, this.user).then(() => {
+                  //this.$router.push('/view')
+                  this.user = {
+                    username:'',  
+                    name: '',
+                    email: '',
+                    gender: '',
+                    pass: '',
+                    phone: '',
+                  }
+                }).catch(error => {
+                    console.log(error)
+                });
+            },
+            checkPassword() {
+                // Verificamos si las constraseñas no coinciden 
+                if (this.user.pass != this.pass) {
+                    // Si las constraseñas no coinciden mostramos un mensaje 
+                    document.getElementById("error").classList.add("mostrar");
+                    return false;
+                } else {
+                    this.disabled = true;
+                    /*
+                    // Si las contraseñas coinciden ocultamos el mensaje de error
+                    document.getElementById("error").classList.remove("mostrar");
+                    // Mostramos un mensaje mencionando que las Contraseñas coinciden 
+                    document.getElementById("ok").classList.remove("ocultar");
+                    // Desabilitamos el botón de login 
+                    document.getElementById("login").disabled = true;
+                    // Refrescamos la página (Simulación de envío del formulario) 
+                    setTimeout(function() {
+                        location.reload();
+                    }, 3000);
+                    return true;
+                    */
+                }
+            
+            
+            }
+        }
+    }
+</script>
 
 <style>
 
@@ -84,6 +170,12 @@
         top: 55%;
         left: 0;
         z-index: 1;
+    }
+    .ocultar {
+    display: none;
+    }
+    .mostrar {
+        display: block;
     }
     /*
     html,
@@ -129,48 +221,3 @@
 
 </style>
 
-
-<script>
-
-    import axios from "axios";
-
-    export default {
-        data() {
-            return {
-                user: {
-                   name: '',
-                   email: '',
-                   gender: '',
-                   phone: ''
-                }
-            }
-        },
-        methods: {
-            handleSubmitForm() {
-                let apiURL = 'http://localhost:3000/api/create-user';
-                
-                axios.post(apiURL, this.user).then(() => {
-                  //this.$router.push('/view')
-                  this.user = {
-                    name: '',
-                    email: '',
-                    gender: '',
-                    pass: '',
-                    phone: '',
-                  }
-                }).catch(error => {
-                    console.log(error)
-                });
-            },
-            check(input) {
-                if (input.value != document.getElementById('password').value) {
-                    input.setCustomValidity('No coinciden');
-                } else {
-                    // input is valid -- reset the error message
-                    input.setCustomValidity('');
-                }
-            }
-        }
-    }
-
-</script>
