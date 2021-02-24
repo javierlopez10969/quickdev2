@@ -3,7 +3,6 @@
     <!-- NavBar component real -->
     <Navbar></Navbar>
     <!--
-    <Home></Home>
     <nav class="navbar navbar-dark color1 justify-content-between flex-nowrap flex-row">
       <div class="container-fluid">
         <a class="navbar-brand float-left " href="/">Transformación digital | QuickDev</a>
@@ -28,11 +27,10 @@
     </nav>
     -->
 
-    <!-- Router view 
+    <!-- Router view -->
     <div class="container mt-5">
       <router-view></router-view>
     </div>
-    -->
   </div>
 
   
@@ -40,14 +38,12 @@
 </template>
 
 <script>
-import Navbar from './components/General/Navbar.vue';
-//import Home from './components/home/Home.vue';
+import Navbar from './components/general/Navbar.vue'
 
 export default {
   name: 'App',
   components: {
-    Navbar,
-    //Home
+    Navbar
   }
 }
 </script>

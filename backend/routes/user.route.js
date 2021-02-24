@@ -4,7 +4,11 @@ const userRoute = express.Router();
 const faker = require('faker');
 
 // Modelo de usuario
-let userModel = require('../models/User');
+const userModel = require('../models/User');
+
+// Hash Contraseña
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 //GET para mostrar usuarios
 userRoute.route('/users').get((req, res) => {
@@ -16,7 +20,11 @@ userRoute.route('/users').get((req, res) => {
    }
  })
 })
+
+//Crear usuario en post 1
  userRoute.route('/create-user').post((req, res, next) => {
+
+    //body.pass = bcrypt.hashSync(req.body.pass, saltRounds);
     userModel.create(req.body, (error, data) => {
     if (error) {
       return next(error)
@@ -25,6 +33,29 @@ userRoute.route('/users').get((req, res) => {
     }
   })
 });
+
+userRoute.post('/nuevo-usuario', async (req, res) => {
+
+  const body = {
+    nombre: req.body.nombre,
+    email: req.body.email,
+    role: req.body.role
+  }
+  //Encriptación de contraseña
+  body.pass = bcrypt.hashSync(req.body.pass, saltRounds);
+
+  try {
+    const userDB = await userModel.create(body);
+    return res.json(userDB);
+  } catch (error) {
+    return res.status(500).json({
+      mensaje: 'Ocurrio un error',
+      error
+    });
+  }
+
+});
+
 
 userRoute.route('/edit-user/:id').get((req, res) => {
    userModel.findById(req.params.id, (error, data) => {

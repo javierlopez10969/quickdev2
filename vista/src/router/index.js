@@ -9,7 +9,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: () => import('../components/home/Home')
+    component: () => import('../components/general/Home')
   },
   {
     path: '/register',

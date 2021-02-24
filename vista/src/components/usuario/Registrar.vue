@@ -11,33 +11,34 @@
                   <form class="form-signin">
                     
                     <article class="card-body mx-auto" style="max-width: 400px;">
-                        
                         <h4 class="card-title text-center">Crear cuenta</h4>
-                        <form>
+                        <form @submit.prevent="handleSubmitForm">
                         <div class="form-group input-group">
-                            <input name="" class="form-control rounded-pill" placeholder="Nombre" type="text" required="">
+                            <input name="" class="form-control rounded-pill" placeholder="Nombre" type="text" v-model="user.name" required>
                         </div> 
                         <div class="form-group input-group">
-                            <input name="" class="form-control rounded-pill" placeholder="Correo electrónico" type="email" required="">
+                            <input name="" class="form-control rounded-pill" placeholder="Correo electrónico" type="email" v-model="user.email" required>
                         </div> 
                         <div class="form-group input-group">
                             <select class="custom-select rounded-pill" style="max-width: 120px;">
                                 <option selected="">+569</option>
                                 <option value="1">+562</option>
                             </select>
-                            <input name="" class="form-control rounded-pill" placeholder="Número teléfono" type="text">
+                            <input name="" class="form-control rounded-pill" placeholder="Número teléfono" type="text" v-model="user.phone" required>
                         </div> 
                         <div class="form-group input-group rounded-pill">
-                            <select class="form-control rounded-pill " placeholder="Seleccionar tipo de usuario" required="">
-                                <option>Cliente</option>
-                                <option>Feriante</option>
+
+                            <select class="form-control rounded-pill " v-model="user.gender" required placeholder="Seleccionar tipo de prec" >
+                                <option>Hombre</option>
+                                <option>Mujer</option>
+                                <option>Haitiano</option>
                             </select>
+                        </div>
+                        <div class="form-group input-group">
+                            <input class="form-control rounded-pill" placeholder="Contraseña" type="password" v-model="user.pass" required id="password">
                         </div> 
                         <div class="form-group input-group">
-                            <input class="form-control rounded-pill" placeholder="Contraseña" type="password" required="" id="password">
-                        </div> 
-                        <div class="form-group input-group">
-                            <input class="form-control rounded-pill" placeholder="Repetir contraseña" type="password" required="" oninput="check(this)">
+                            <input class="form-control rounded-pill" placeholder="Repetir contraseña" type="password"  required oninput="check(this)">
                         </div>                                      
                         <div class="form-group text-center">
                             <button class="btn btn-lg color4 rounded-pill" type="submit">Crear cuenta</button>
@@ -129,16 +130,47 @@
 </style>
 
 
-<!-- Javascript-->
-<script language='javascript' type='text/javascript'>
-    /*
-    function check(input) {
-        if (input.value != document.getElementById('password').value) {
-            input.setCustomValidity('No coinciden');
-        } else {
-            // input is valid -- reset the error message
-            input.setCustomValidity('');
+<script>
+
+    import axios from "axios";
+
+    export default {
+        data() {
+            return {
+                user: {
+                   name: '',
+                   email: '',
+                   gender: '',
+                   phone: ''
+                }
+            }
+        },
+        methods: {
+            handleSubmitForm() {
+                let apiURL = 'http://localhost:3000/api/create-user';
+                
+                axios.post(apiURL, this.user).then(() => {
+                  //this.$router.push('/view')
+                  this.user = {
+                    name: '',
+                    email: '',
+                    gender: '',
+                    pass: '',
+                    phone: '',
+                  }
+                }).catch(error => {
+                    console.log(error)
+                });
+            },
+            check(input) {
+                if (input.value != document.getElementById('password').value) {
+                    input.setCustomValidity('No coinciden');
+                } else {
+                    // input is valid -- reset the error message
+                    input.setCustomValidity('');
+                }
+            }
         }
     }
-    */
+
 </script>

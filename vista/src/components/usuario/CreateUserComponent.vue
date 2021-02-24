@@ -60,7 +60,8 @@
                     name: '',
                     email: '',
                     gender: '',
-                    phone: ''
+                    pass: '',
+                    phone: '',
                   }
                 }).catch(error => {
                     console.log(error)
