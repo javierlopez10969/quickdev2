@@ -8,18 +8,18 @@
                 
                 <div class="container-fluid ventana text-center">
                     <a href="/"><img src="https://i.ibb.co/g9T9mMH/quickdev.png" alt="logo" ></a>
-                    <form class="form-signin ">                        
+                    <form class="form-signin" @submit.prevent="login">                        
                         <h4 class="card-titl text-center">Iniciar sesión</h4>
                         <label for="inputEmail" class="sr-only">Correo electrónico</label>
-                        <input type="email" id="inputEmail" class="form-control rounded-pill" placeholder="Correo electrónico" required="" autofocus="">
+                        <input type="email" id="inputEmail" class="form-control rounded-pill" placeholder="Correo electrónico" v-model="user.email" required="" autofocus="">
                         <label for="inputPassword" class="sr-only">Contraseña</label>
-                        <input type="password" id="inputPassword" class="form-control rounded-pill" placeholder="Contraseña" required="">
+                        <input type="password" id="inputPassword" class="form-control rounded-pill" placeholder="Contraseña"  v-model="user.pass" required="">
                         <div class="checkbox mb-3">
                           <label>
                             <input type="checkbox" value="remember-me"> Recordarme en este equipo
                           </label>
                         </div>
-                        <button class="btn btn-lg color4 rounded-pill text-center" type="submit">Ingresar</button>
+                        <button class="btn btn-lg color4 rounded-pill text-center " type="submit" >Ingresar</button>
 
                     </form>
                     <p class="text-center mt-lg-5">¿No tienes Cuenta?  <a href="/registrar">Registrate aquí</a> </p>          
@@ -33,7 +33,38 @@
 
 </template>
 
+<script>
+    import axios from 'axios';
+    export default {
+    name: 'Login',
+    data() {
+        return {
+            user:{
+                email: '',
+                pass: ''
+            },
 
+            error: '',
+        }
+    },
+    methods: {
+        login() {
+        axios.post('http://localhost:3000/api/login', this.user)
+            .then(res => {
+            //if successfull
+            if (res.status === 200) {
+                localStorage.setItem('token', res.data.token);
+                this.$router.push( {path:'/home'});
+            }
+            }, err => {
+                alert('fail');
+                console.log(err.response);
+                this.error = err.response.data.error
+            })
+        }
+    }
+    }
+</script>
 
 <!-- CSS -->
 <style>

@@ -30,6 +30,11 @@ const routes = [
     path: '/edit/:id',
     name: 'edit',
     component: () => import('../components/usuario/EditarUsuario')
+  },
+  {
+    path: '/home',
+    name: 'logeado',
+    component: () => import('../components/usuario/Landing')
   }
 
 

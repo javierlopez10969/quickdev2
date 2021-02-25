@@ -52,13 +52,13 @@
                             </select>
                         </div>
                         <div class="form-group input-group">
-                            <input class="form-control rounded-pill" placeholder="Contraseña" type="password" v-model="user.pass" required >
+                            <input class="form-control rounded-pill" placeholder="Contraseña" type="password" v-model="user.pass" required name="password" >
                         </div> 
                         <div class="form-group input-group">
-                            <input class="form-control rounded-pill" placeholder="Repetir contraseña" type="password" v-model.lazy="pass"  required  oninput="checkPassword(this)" >
+                            <input class="form-control rounded-pill" id="passbox" placeholder="Repetir contraseña" type="password" v-model="pass" oninput="checkPassword()" @keypress="checkPassword()"  @change="checkPassword()" required   >
                         </div>                                      
                         <div class="form-group text-center">
-                            <button class="btn btn-lg color4 rounded-pill" type="submit" >Crear cuenta</button>
+                            <button class="btn btn-lg color4 rounded-pill" type="submit"  @click="checkPassword()">Crear cuenta</button>
                         </div>     
                         <p class="text-center">¿Ya tienes cuenta?  <a href="/login">Inicia sesión aquí</a> </p>                                                                 
                         </form>
@@ -84,12 +84,14 @@
         data() {
             return {
                 user: {
-                   username: '', 
+                    
+                    username: '', 
                    name: '',
                    email: '',
                    gender: '',
                    phone: '',
                    pass: '',
+                    
                 },
                 pass: ''
             }
@@ -102,7 +104,8 @@
         methods: {
             handleSubmitForm() {
                 let apiURL = 'http://localhost:3000/api/registrar';
-                
+                this.pass = '';
+                this.limpiarMensaje();
                 axios.post(apiURL, this.user).then(() => {
                   //this.$router.push('/view')
                   this.user = {
@@ -113,31 +116,32 @@
                     pass: '',
                     phone: '',
                   } 
-                 // pass: '',
+                 //
                 }).catch(error => {
                     console.log(error)
                 });
             },
-            checkPassword(a) {
-                let mostrar = true;
-                let mensaje= "Las contraseñas no coinciden"
+            checkPassword() {
                 // Verificamos si las constraseñas no coinciden 
                 if (this.user.pass != this.pass) {
-                   alert("No coinciden las contraseñas")
+                   //alert("No coinciden las contraseñas")
+                   document.getElementById("passbox").setCustomValidity("Las contraseñas no coinciden")
+                   
+                   
                     // Si las constraseñas no coinciden mostramos un mensaje 
                    // document.getElementById("error").classList.add("mostrar");
                    //a.setCustomValidity("asdgasdgf dasgfas <3");
                     
-                }else{
-                    mostrar = false;
                 }
-                if(mostrar==true){
-                    
-                    a.setCustomValidity(mensaje);
+                else {                    
+                    document.getElementById("passbox").setCustomValidity('') 
+                    document.getElementById("passbox").selected = false 
                 }
-            
-            
+            },
+            limpiarMensaje(){
+                document.getElementById("passbox").setCustomValidity('')  
             }
+
         }
     }
 </script>
