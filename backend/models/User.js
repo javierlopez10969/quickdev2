@@ -24,5 +24,5 @@ let userSchema = mongoose.Schema({
 
 // Validator
 userSchema.plugin(uniqueValidator, { message: 'Error, esperaba {PATH} único.' });
-
+// Export
 module.exports = mongoose.model('User', userSchema);

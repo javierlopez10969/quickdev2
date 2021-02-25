@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+// No sera mejor importar desde un comienzo axios 
+//import router from './router'
+//import axios from 'axios'
+
+
 Vue.use(VueRouter)
 
 

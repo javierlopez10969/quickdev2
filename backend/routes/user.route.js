@@ -110,7 +110,7 @@ userRoute.route('/login').post((req, res, next) => {
     if (!bcrypt.compareSync(req.body.pass, user.pass)) {
       console.log('wrong password');
       return res.status(401).json({
-        tite: 'login failed',
+        title: 'login failed',
         error: 'invalid credentials'
     })
     }

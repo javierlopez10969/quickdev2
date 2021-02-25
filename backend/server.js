@@ -8,17 +8,28 @@ const express = require('express'),
 //RUTAS
 const studentAPI = require('../backend/routes/student.route');
 const userAPI = require('../backend/routes/user.route');
+const pruebaAPI = require('../backend/routes/api.route');
 //const proyectAPI = require('../backend/routes/proyect.route');
 //const permissionAPI = require('../backend/routes/permission.route');
 //const platformAPI = require('../backend/routes/platform.route');
 //const rolAPI = require('../backend/routes/rol.route');
 //const tableAPI = require('../backend/routes/table.route');
 
+//express
 const app = express();
+
+//Configuracion bodyParser
+app.use(bodyParser.urlencoded({
+  extended:true
+}));app.use(bodyParser.json());
+
+/*
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+*/
+// Cors
 app.use(cors());
 
 // API
@@ -29,13 +40,17 @@ app.use('/api', userAPI)
 //app.use('/api', platformAPI)
 //app.use('/api', rolAPI)
 //app.use('/api', proyetableAPIctAPI)
-
+//Prueba 
+app.use('/api2', pruebaAPI);
 
 // Create port
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
   console.log('Connected to port ' + port)
 })
+
+//Mensaje de inicio
+app.get('/', (req, res) => res.send('Hello World with Express')); 
 
 // Find 404
 app.use((req, res, next) => {

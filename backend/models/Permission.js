@@ -1,6 +1,7 @@
 // Permission.js
 const mongoose = require('mongoose');
 // Setup schema
+// En esta seccion van los atributos
 const permissionSchema = mongoose.Schema({
     name: {
         type: String,
