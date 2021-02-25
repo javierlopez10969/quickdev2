@@ -22,11 +22,7 @@
                         <button class="btn btn-lg color4 rounded-pill text-center" type="submit">Ingresar</button>
 
                     </form>
-                    <p class="text-center mt-lg-5">¿No tienes Cuenta?  <a href="/registrar">Registrate aquí</a> </p>  
-
-                    <div class = "end-100 bottom">
-                        <p class="padding_up text-muted ">QuickDev - Transformación Digital - 2021</p>
-                    </div>        
+                    <p class="text-center mt-lg-5">¿No tienes Cuenta?  <a href="/registrar">Registrate aquí</a> </p>          
                 </div>   
             </div>
 
@@ -41,28 +37,17 @@
 
 <!-- CSS -->
 <style>
-    /*
-    html,
-    body {
-        height: 100%;
+    body, html {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    min-height: 100vh;
     }
-
     body {
-        display: -ms-flexbox;
-        display: -webkit-box;
-        display: flex;
-        -ms-flex-align: center;
-        -ms-flex-pack: center;
-        -webkit-box-align: center;
-        align-items: center;
-        -webkit-box-pack: center;
-        justify-content: center;        
-        padding-top: 40px;
-        padding-bottom: 40px;
-        background: linear-gradient(0deg, #A7C957 -12.51%, rgba(255, 255, 255, 0) 85.81%), #F9F6F7;        
-        background-repeat: repeat-y;
+        background: linear-gradient(180deg, #736CED -7.87%, rgba(255, 255, 255, 0) 20%),
+                    linear-gradient(0deg, #736CED -12.07%, rgba(255, 255, 255, 0) 20%),
+                    #FEF9FF;;
     }
-    */
     
     .form-signin {
         width: 100%;

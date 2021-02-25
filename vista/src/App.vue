@@ -2,8 +2,26 @@
   <div>
     <!-- NavBar component real -->
     <Navbar></Navbar>
+
+    <!-- 
+    <button @click="changeShow">
+      Mostrar/Ocultar
+    </button>
+    <transition name="slide-fade">
+      <p v-if="show=== true">
+        Hola mundo
+      </p>     
+    </transition>
+    <div>
+      {{$route.name}}
+    </div>
+
+    -->
     <div class="container mt-5">
       <router-view></router-view>
+    </div>
+    <div class = "container bottom">
+      <Footer></Footer>
     </div>
   </div>
 
@@ -13,12 +31,28 @@
 
 <script>
 import Navbar from './components/general/Navbar.vue'
+import Footer from './components/general/Footer.vue'
 
 export default {
   name: 'App',
   components: {
-    Navbar
-  }
+    Navbar,
+    Footer
+  },
+  methods: {
+        changeShow(){
+      if(this.show== true){
+        this.show= false;
+      }else{
+        this.show= true;
+      }
+    },
+  },
+  data() {
+    return {
+      show : 'true',
+    }
+  },
 }
 </script>
 
@@ -57,6 +91,32 @@ export default {
   .margen{
     margin-right: 10px;
   }
+    /* Las animaciones de entrada y salida pueden usar */
+  /* funciones de espera y duración diferentes.      */
+  .slide-fade-enter-active {
+    transition: all .3s ease;
+  }
+  .slide-fade-leave-active {
+    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .slide-fade-enter, .slide-fade-leave-to
+  /* .slide-fade-leave-active below version 2.1.8 */ {
+    transform: translateX(10px);
+    opacity: 0;
+  }
+  .texto-publicitario{
+    font-family: Dosis;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 38px;
+    line-height: 48px;
+    display: flex;
+    align-items: center;
 
+    color: #6400B2;
+  }
+  .roboto{
+    font-family: 'Roboto', sans-serif;
+  }
 
 </style>

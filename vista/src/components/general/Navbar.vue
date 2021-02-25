@@ -29,7 +29,7 @@
             </div>
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Boton Iniciar Sesion -->
-                        <a class="btn btn-default color2 rounded-pill " href="/login" role="button">Iniciar Sesión</a>
+                        <a class="btn btn-default color2 rounded-pill" href="/login" role="button">Iniciar Sesión</a>
                     <!-- Boton Registrarse -->
                     <div class="col-sm button ">
                         <a class="btn btn-default color2 rounded-pill " href="/registrar" role="button">Registrarse</a>

@@ -42,26 +42,26 @@
                         </div> 
                         <div class="form-group input-group rounded-pill">
 
-                            <select class="form-control rounded-pill " v-model="user.gender" required placeholder="Seleccionar tipo de prec" >
+                            <select class="form-control rounded-pill " v-model="user.gender" required >
+                                <option hidden selected disabled value="">Selecciona un género</option>
                                 <option>Hombre</option>
                                 <option>Mujer</option>
                                 <option>Haitiano</option>
+                                <option>Otro</option>
+                                <option>Prefiero no decirlo</option>
                             </select>
                         </div>
                         <div class="form-group input-group">
-                            <input class="form-control rounded-pill" placeholder="Contraseña" type="password" v-model="user.pass" required id="password1">
+                            <input class="form-control rounded-pill" placeholder="Contraseña" type="password" v-model="user.pass" required >
                         </div> 
                         <div class="form-group input-group">
-                            <input class="form-control rounded-pill" placeholder="Repetir contraseña" type="password" v-model="pass"  required id="password1" @change="checkPassword" >
+                            <input class="form-control rounded-pill" placeholder="Repetir contraseña" type="password" v-model.lazy="pass"  required  oninput="checkPassword(this)" >
                         </div>                                      
                         <div class="form-group text-center">
-                            <button class="btn btn-lg color4 rounded-pill" type="submit" disabled="disabled == true">Crear cuenta</button>
+                            <button class="btn btn-lg color4 rounded-pill" type="submit" >Crear cuenta</button>
                         </div>     
                         <p class="text-center">¿Ya tienes cuenta?  <a href="/login">Inicia sesión aquí</a> </p>                                                                 
                         </form>
-                    <div class = "end-100 bottom text-center padding_up">
-                        <p class="padding_up text-muted "> QuickDev - Transformación Digital - 2021</p>
-                    </div> 
                     </article>
                   </form>
                 </div>
@@ -91,9 +91,7 @@
                    phone: '',
                    pass: '',
                 },
-                pass: '',
-                disabled : false
-
+                pass: ''
             }
         },
         computed: {
@@ -114,32 +112,28 @@
                     gender: '',
                     pass: '',
                     phone: '',
-                  }
+                  } 
+                 // pass: '',
                 }).catch(error => {
                     console.log(error)
                 });
             },
-            checkPassword() {
+            checkPassword(a) {
+                let mostrar = true;
+                let mensaje= "Las contraseñas no coinciden"
                 // Verificamos si las constraseñas no coinciden 
                 if (this.user.pass != this.pass) {
+                   alert("No coinciden las contraseñas")
                     // Si las constraseñas no coinciden mostramos un mensaje 
-                    document.getElementById("error").classList.add("mostrar");
-                    return false;
-                } else {
-                    this.disabled = true;
-                    /*
-                    // Si las contraseñas coinciden ocultamos el mensaje de error
-                    document.getElementById("error").classList.remove("mostrar");
-                    // Mostramos un mensaje mencionando que las Contraseñas coinciden 
-                    document.getElementById("ok").classList.remove("ocultar");
-                    // Desabilitamos el botón de login 
-                    document.getElementById("login").disabled = true;
-                    // Refrescamos la página (Simulación de envío del formulario) 
-                    setTimeout(function() {
-                        location.reload();
-                    }, 3000);
-                    return true;
-                    */
+                   // document.getElementById("error").classList.add("mostrar");
+                   //a.setCustomValidity("asdgasdgf dasgfas <3");
+                    
+                }else{
+                    mostrar = false;
+                }
+                if(mostrar==true){
+                    
+                    a.setCustomValidity(mensaje);
                 }
             
             
@@ -149,6 +143,17 @@
 </script>
 
 <style>
+    body, html {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    min-height: 100vh;
+    }
+    body {
+        background: linear-gradient(180deg, #736CED -7.87%, rgba(255, 255, 255, 0) 20%),
+                    linear-gradient(0deg, #736CED -12.07%, rgba(255, 255, 255, 0) 20%),
+                    #FEF9FF;;
+    }
 
     .divider-text {
         position: relative;
@@ -202,7 +207,7 @@
 
     .ventana{
         width: 540.93px;
-        height: 693px;
+        height: 800px;
         left: 482px;
         top: 26px;
 
