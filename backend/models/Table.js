@@ -11,8 +11,12 @@ const tableSchema = mongoose.Schema({
         type: String,
         required: true
     },
-
-    
 });
 // Export rol model
-module.exports = mongoose.model('Table', tableSchema);
+//module.exports = mongoose.model('Table', tableSchema);
+
+// Export Contact model
+var Table = module.exports = mongoose.model('table',tableSchema);
+    module.exports.get = function (callback, limit) {
+    Table.find(callback).limit(limit);
+}

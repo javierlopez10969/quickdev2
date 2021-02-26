@@ -15,4 +15,7 @@ const permissionSchema = mongoose.Schema({
     
 });
 // Export rol model
-module.exports = mongoose.model('Permission', permissionSchema);
+var Permission = module.exports = mongoose.model('permission',permissionSchema);
+    module.exports.get = function (callback, limit) {
+    Permission.find(callback).limit(limit);
+}

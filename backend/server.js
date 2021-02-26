@@ -5,18 +5,21 @@ const express = require('express'),
   database = require('./database'),
   bodyParser = require('body-parser');
 
+//express
+const app = express();
+
 //RUTAS
 const studentAPI = require('../backend/routes/student.route');
 const userAPI = require('../backend/routes/user.route');
 const pruebaAPI = require('../backend/routes/api.route');
+const fakers= require('../backend/routes/fakerp.route');
+
 //const proyectAPI = require('../backend/routes/proyect.route');
 //const permissionAPI = require('../backend/routes/permission.route');
 //const platformAPI = require('../backend/routes/platform.route');
 //const rolAPI = require('../backend/routes/rol.route');
 //const tableAPI = require('../backend/routes/table.route');
 
-//express
-const app = express();
 
 //Configuracion bodyParser
 app.use(bodyParser.urlencoded({
@@ -41,7 +44,8 @@ app.use('/api', userAPI)
 //app.use('/api', rolAPI)
 //app.use('/api', proyetableAPIctAPI)
 //Prueba 
-app.use('/api2', pruebaAPI);
+app.use('/api2', pruebaAPI)
+app.use('/faker', fakers)
 
 // Create port
 const port = process.env.PORT || 3000;

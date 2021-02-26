@@ -6,16 +6,14 @@ let proyectSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    email: {
+    description: {
         type: String,
         required: true
     },
-    gender: String,
-    phone: String,
-    create_date: {
-        type: Date,
-        default: Date.now
-    }
 });
 
-module.exports = mongoose.model('Proyect', proyectSchema)
+// Export rol model
+var Proyect = module.exports = mongoose.model('proyect',proyectSchema);
+    module.exports.get = function (callback, limit) {
+    Proyect.find(callback).limit(limit);
+}

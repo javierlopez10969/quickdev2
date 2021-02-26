@@ -227,15 +227,16 @@ userRoute.route('/delete-user/:id').delete((req, res, next) => {
 })
 
 //Faker usuario
-userRoute.get('/faker-user', async (req, res) => {
+userRoute.get('/faker-user',  (req, res) => {
   console.log("Ruta de fakers");
   for (let i = 0; i < 100 ; i++) {
-      await userModel.create({
+          userModel.create({
           name : faker.name.findName(),
+          username : faker.name.findName(),
+          pass : faker.internet.password(),
           email: faker.internet.email(),
           gender: faker.name.gender() ,
           phone: faker.phone.phoneNumber()
-
       })
   }
   res.send('Creando 100 usuarios faker');

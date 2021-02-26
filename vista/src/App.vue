@@ -2,7 +2,7 @@
   <div>
     <!-- NavBar component real -->
     <Navbar></Navbar>
-
+    
     <!-- 
     <button @click="changeShow">
       Mostrar/Ocultar
@@ -15,25 +15,29 @@
     <div>
       {{$route.name}}
     </div>
-
     -->
+    
     <div class="container mt-5">
       <router-view></router-view>
     </div>
     <div class = "container bottom">
       <Footer></Footer>
     </div>
+    
   </div>
+  
 
   
 
 </template>
 
 <script>
+
 import Navbar from './components/general/Navbar.vue'
 import Footer from './components/general/Footer.vue'
 
 export default {
+
   name: 'App',
   components: {
     Navbar,

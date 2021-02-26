@@ -6,16 +6,14 @@ let plarformSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    email: {
+    description: {
         type: String,
         required: true
     },
-    gender: String,
-    phone: String,
-    create_date: {
-        type: Date,
-        default: Date.now
-    }
 });
 
-module.exports = mongoose.model('Platform', plarformSchema)
+// Export rol model
+var Platform = module.exports = mongoose.model('platform',plarformSchema);
+    module.exports.get = function (callback, limit) {
+    Platform.find(callback).limit(limit);
+}
