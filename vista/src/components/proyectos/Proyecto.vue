@@ -5,36 +5,32 @@
 
         </div>
         <div col class="container-fluid ventana ">
-            <!--  @submit.prevent="handleUpdateForm"-->
-            <form>
-                            PROYECTO 
+            <!--  -->
+            <form @submit.prevent="handleUpdateForm"> 
+                PROYECTO 
                 <h1>{{proyect.titulo}}</h1>
-                <h2> Cliente : {{proyect.titulo}} </h2>
+                <h2> Cliente : {{proyect.cliente}} </h2>
                 <h6>
                 <p>{{proyect.contenido}}
-                        </p> 
+                </p> 
                 </h6>
                 <h2>
                     <p> 
-
-                    Postulantes data: 
-                    </p>
-                    {{postulantes}}
-                    <p> 
-
                     Postulantes proyect : 
                     </p>
                     {{proyect.postulantes}}
                 </h2>
-                <div class="form-group">
                     <div class="form-group text-center">
-                        <button class="btn btn-lg color4 rounded-pill" type="submit" 
-                        @click="actualizarPostulantes()" > Postular</button>
-                    </div>    
-                </div>
+                </div>   
+
+               
+                <button class="btn btn-lg color4 rounded-pill"
+                @click="checkearPostulantes();actualizarPostulantes();" > Postular</button>
 
             </form>
 
+                <button class="btn btn-lg color4 rounded-pill"
+                @click="actualizarPostulantes()" > Postular</button>
 
 
         </div>
@@ -77,20 +73,23 @@
 <script>
 import axios from "axios";
     export default {
+        props:[
+            'usuario'
+        ],
         data() {
             return {
                 proyect: { },
-                postulantes: [''],
-
-
             }
-        },        
+        },     
         created() {
             let apiURL = `http://localhost:3000/api/edit-proyect/${this.$route.params.id}`;
             axios.get(apiURL).then((res) => {
                 this.proyect = res.data;
-            })
-            this.postulantes = this.proyect.postulantes;
+            });
+            this.checkearPostulantes();
+        },
+        computed(){
+
         },
         methods: {
             handleUpdateForm() {
@@ -103,8 +102,23 @@ import axios from "axios";
                 });
             },
             actualizarPostulantes(){
-                this.postulantes.push('Hola')
-                this.proyect.postulantes.push("hola")
+                //this.postulantes.push('Hola')
+                this.proyect.postulantes.push({
+                    nombre: this.usuario.name, 
+                    id: this.usuario._id 
+            });
+            },
+            checkearPostulantes(){
+                let arreglo = this.proyect.postulantes;
+                let i;
+                for (i = 0; i < arreglo.length; i++) {
+                    if (arreglo[0].id === this.usuario._id) {
+                        alert('usted ya postulado a este proyecto')
+                        this.$router.push('/tablon');
+                        return false;
+                    }
+                }
+                return true;
             }
         }    
     }

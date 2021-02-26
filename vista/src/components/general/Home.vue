@@ -4,14 +4,11 @@
         <div class="row">
             <div class="col">
             </div>
-
             <div class="col">
-                
                 <div class="container-fluid text-right">
                     <img src="https://i.ibb.co/tBsCcYD/sidedev.png" alt="sidedev" border="0">
                 </div>   
             </div>
-
             <div class="col">
             </div>
         </div>
@@ -22,12 +19,8 @@
           </div>
           <div class="col texto-publicitario">
             Si tu empresa necesita un servicio o requiere de una transformación tecnologica para entregar servicios a los demás, QuickDev es tu solución, esta plataforma de transformación funciona como intermediaria entre especialistas y clientes de cualquier rubro.
-
           </div>
-
-
         </div>
-
         <div class="row">
           <div class="col texto-publicitario">
             
@@ -65,6 +58,17 @@
     </div>
 </template>
 
+<script>
+export default {
+  created() {
+    if (localStorage.getItem('token') === null) {
+        console.log('hola')
+    }else{
+        this.$router.push('/home');
+    }
+  },
+}
+</script>
 <style>
   body, html {
   padding: 0;

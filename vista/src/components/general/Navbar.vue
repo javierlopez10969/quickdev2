@@ -4,11 +4,11 @@
         <div class="row color1">
             <nav class="navbar navbar-expand-sm" >
                         
-            <div v-if="!botones">          
-                    <span class="navbar-toggler-icon"></span>
-            </div>
             <!-- Brand/logo -->
-            <a class="navbar-brand" href="/" >
+            <a class="navbar-brand" href="/" v-if="botones" >
+                <img src="https://i.ibb.co/g9T9mMH/quickdev.png"  alt="quickdev"  height="60"/>
+            </a>
+            <a class="navbar-brand" href="/home" v-if="!botones" >
                 <img src="https://i.ibb.co/g9T9mMH/quickdev.png"  alt="quickdev"  height="60"/>
             </a>
             <!-- Links -->
@@ -32,6 +32,10 @@
                     </form>
                 </ul>
 
+
+            </div>
+            <div v-if= "!botones">
+                    {{user.name}}
             </div>
             <ul class="nav navbar-nav navbar-right"  v-if="botones">
                 <!-- Boton Iniciar Sesion -->
@@ -43,7 +47,12 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right"  v-if="!botones">
-                <button class="btn btn-default color6 rounded-pill center-text"  type="submit" @click="logout()"> <i class="bi bi-power"></i>Cerrar Sesión</button>
+                <ul class="nav navbar-nav navbar-right">
+                        
+                </ul>
+                <div>
+                    <a class="btn btn-default color6 rounded-pill center-text"  type="submit" @click="logout()" role="button"> <i class="bi bi-power"></i>Cerrar Sesión</a>
+                </div>
             </ul>
 
         </nav>        
@@ -66,11 +75,15 @@ export default {
             }
         } 
     },
-    props: ['botones'],
+    props: [
+        'botones',
+        'user'
+        ],
     data() {
         return {
         }
     },
+ 
     mounted: function () {
     },
     created(){

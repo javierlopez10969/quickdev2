@@ -19,7 +19,7 @@
                             <input type="checkbox" value="remember-me"> Recordarme en este equipo
                           </label>
                         </div>
-                        <button class="btn btn-lg color4 rounded-pill text-center " type="submit" >Ingresar</button>
+                        <button class="btn btn-lg color4 rounded-pill text-center " role="button" type="submit" >Ingresar</button>
 
                     </form>
                     <p class="text-center mt-lg-5">¿No tienes Cuenta?  <a href="/registrar">Registrate aquí</a> </p>          
@@ -65,7 +65,6 @@
             //if successfull
             if (res.status === 200) {
                 localStorage.setItem('token', res.data.token);
-                //this.$bus.$emit('logged', 'User logged')
                 this.$router.push({ path: '/home' });
             }
             }, err => {

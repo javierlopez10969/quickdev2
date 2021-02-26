@@ -1,7 +1,13 @@
 <template>
   <div>
     <h1 class = "roboto">
-      Hola : {{name}} de correo : {{email}}
+      <p>
+        Hola : {{user.name}}
+      </p>  
+      de correo : {{user.email}}
+      <p>
+        id _  {{user._id}}
+      </p>
     </h1>
      <button class="btn btn-lg color4 rounded-pill" 
      type="submit" 
@@ -17,11 +23,11 @@
 <script>
 import axios from 'axios';
 export default {
-  name: 'Landing',
   data() {
     return {
-      name: '',
-      email: '',
+      user :{
+      },
+      i : 0,
     }
   },
   created() {
@@ -34,9 +40,11 @@ export default {
     axios.get('http://localhost:3000/api/user',
      { headers: { token: localStorage.getItem('token')}})
       .then(res => {
-        this.name = res.data.user.name;
-        this.email = res.data.user.email;
-      })
+        this.user = res.data.user;
+      });
+  },
+  updated() {
+      this.$emit('update:usuario', this.usuario);
   },
   methods: {
     logout() {

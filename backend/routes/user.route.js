@@ -90,16 +90,6 @@ userRoute.route('/login').post((req, res, next) => {
         error: 'invalid credentials'
       })
     }
-    //incorrect password
-    /*
-    if (req.body.pass != user.pass) {
-      console.log('wrong password');
-      return res.status(401).json({
-        title: 'login failed',
-        error: 'invalid credentials'
-      })
-    }*/
-
     if (!bcrypt.compareSync(req.body.pass, user.pass)) {
       console.log('wrong password');
       return res.status(401).json({
@@ -129,10 +119,7 @@ userRoute.route('/user').get((req, res, next) => {
       if (err) return console.log(err)
       return res.status(200).json({
         title: 'user grabbed',
-        user: {
-          email: user.email,
-          name: user.name
-        }
+        user
       })
     })
 

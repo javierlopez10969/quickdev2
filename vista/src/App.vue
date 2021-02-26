@@ -1,14 +1,15 @@
 <template>
   <div>
     <!-- NavBar component real -->
-    <Navbar v-bind:botones= show>  </Navbar>
+    <Navbar v-bind:botones= show v-bind:user=usuario>  </Navbar>
     <div class="container mt-5">
       
   {{ currentRouteName }} Tamano : {{tamanoRoute}}
-
+  {{usuario.name}}
     </div>
     <div v-if="tamanoRoute===0" class="container mt-5">
-      <router-view></router-view>
+      <!-- v-on:update:usuario="usuario = $event" -->
+      <router-view v-bind:usuario=usuario></router-view>
     </div>
 
     <div class = "container bottom">
@@ -23,9 +24,19 @@
 <script>
 import Navbar from './components/general/Navbar.vue'
 import Footer from './components/general/Footer.vue'
+import axios from 'axios';
 
 export default {
   name: 'App',
+  data() {
+    return {
+      show : 'true',
+      baseURL: "http://localhost:3000/api",
+      tamanoRoute : 0,
+      usuario: {}
+
+    }
+  },
   components: {
     Navbar,
     Footer
@@ -37,13 +48,18 @@ export default {
         }else{
             return false
         }
-      },
+      }
   },
   created() { 
     this.show = this.ocultarMethod();  
     this.tamanoRoute = this.selectTamano();
   },
   updated() {
+    axios.get('http://localhost:3000/api/user',
+     { headers: { token: localStorage.getItem('token')}})
+      .then(res => {
+        this.usuario = res.data.user;
+    });
     this.show = this.ocultarMethod();  
     this.tamanoRoute = this.selectTamano();
   },
@@ -65,15 +81,13 @@ export default {
 
   },
   mounted() {
+    axios.get('http://localhost:3000/api/user',
+     { headers: { token: localStorage.getItem('token')}})
+      .then(res => {
+        this.usuario = res.data.user;
+    });
     this.tamanoRoute = this.selectTamano();
     this.show = this.ocultarMethod();  
-  },
-  data() {
-    return {
-      show : 'true',
-      baseURL: "http://localhost:3000/api",
-      tamanoRoute : 0,
-    }
   },
 }
 </script>
