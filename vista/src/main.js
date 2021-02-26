@@ -1,9 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-// Impostamos axios
-import axios from 'axios'
-
 
 
 
@@ -20,14 +17,6 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
 Vue.config.productionTip = false
-
-//Creamos la instancia de axios
-const axiosInstance = axios.create({
-  baseURL: "http://localhost:8080"
-})
-
-//Para aceder a axios desde this.$http
-Vue.prototype.$http = axiosInstance;
 
 new Vue({
   router,

@@ -18,7 +18,10 @@
                     <a class="nav-link" href="https://github.com/javierlopez10969/quickdev2.git">Proyecto en GitHub</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="#">Link 3</a>
+                    <a class="nav-link" href="/home">Link 3</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="/proyecto">Link 3</a>
                     </li>
                     <form class="form-inline">
                         <input class="form-control mr-sm-2 rounded-pill" type="search" placeholder="Busca tu proyecto" aria-label="Search">
@@ -28,6 +31,7 @@
 
             </div>
             <ul class="nav navbar-nav navbar-right"  v-if="botones">
+                {{botones}}
                 <!-- Boton Iniciar Sesion -->
                     <a class="btn btn-default color2 rounded-pill"  href="/login" role="button" >Iniciar Sesión</a>
                 <!-- Boton Registrarse -->
@@ -36,9 +40,9 @@
                 </div>
 
             </ul>
-            <ul v-else>
-                
-                    <a class="btn btn-default color2 rounded-pill"  href="/home" role="button" > Zapallo</a>
+            <ul class="nav navbar-nav navbar-right"  v-if="!botones">
+                {{botones}}
+                    <button class="btn btn-default color6 rounded-pill center-text"  type="submit" @click="logout()"> <i class="bi bi-power"></i>Cerrar Sesión</button>
             </ul>
 
         </nav>
@@ -47,41 +51,28 @@
     </div>       
 </template>
 
+
 <script>
 export default {
-    methods: {
-    //user is not authorized
-
-   
+    methods: {  
+        logout() {
+            localStorage.clear();
+            if (window.location.pathname == "/"){
+                location.reload();
+            }else{
+                this.$router.push('/');
+            }
+        } 
     },
-    computed:{
-        ocultar() {
-        let botones = true ;
-        if (localStorage.getItem('token') === null) {
-            botones = true
-        }else{
-            botones = false
-        }
-        return botones;
-
-        }
-    },
+    props: ['botones'],
     data() {
         return {
-            botones: true,
-            //usuario : ,
         }
     },
-    /*
-    watch :{
-        botones = ocultar();
-
-    },*/
-    mounted() {
-        this.botones = this.ocultar()
+    mounted: function () {
     },
     created(){
-        this.ocultar()
+
     }
 
 }

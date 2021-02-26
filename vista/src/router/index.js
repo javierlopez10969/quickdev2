@@ -41,13 +41,18 @@ const routes = [
     name: 'logeado',
     component: () => import('../components/usuario/Landing')
   },
-  //Se agrego
+  
   {
-    path: '/contact',
-    name: 'Contact',
-    component:() => import('../components/views/Contact.vue')
+    path: '/tablon',
+    name: 'tablero',
+    component: () => import('../components/proyectos/Tablon')
   },
- 
+  
+  {
+    path: '/proyecto',
+    name: 'proyecto',
+    component: () => import('../components/proyectos/Proyecto')
+  }
   
 ]
 

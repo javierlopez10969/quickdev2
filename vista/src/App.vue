@@ -1,60 +1,78 @@
 <template>
   <div>
     <!-- NavBar component real -->
-    <Navbar></Navbar>
-    
-    <!-- 
-    <button @click="changeShow">
-      Mostrar/Ocultar
-    </button>
-    <transition name="slide-fade">
-      <p v-if="show=== true">
-        Hola mundo
-      </p>     
-    </transition>
-    <div>
-      {{$route.name}}
-    </div>
-    -->
-    
+    <Navbar v-bind:botones= show>  </Navbar>
     <div class="container mt-5">
+      
+  {{ currentRouteName }} Tamano : {{tamanoRoute}}
+
+    </div>
+    <div v-if="tamanoRoute===0" class="container mt-5">
       <router-view></router-view>
     </div>
+
     <div class = "container bottom">
       <Footer></Footer>
     </div>
-    
   </div>
-  
 
   
 
 </template>
 
 <script>
-
 import Navbar from './components/general/Navbar.vue'
 import Footer from './components/general/Footer.vue'
 
 export default {
-
   name: 'App',
   components: {
     Navbar,
     Footer
   },
   methods: {
-        changeShow(){
-      if(this.show== true){
-        this.show= false;
-      }else{
-        this.show= true;
+      ocultarMethod(){
+        if (localStorage.getItem('token') === null) {
+            return true;
+        }else{
+            return false
+        }
+      },
+  },
+  created() { 
+    this.show = this.ocultarMethod();  
+    this.tamanoRoute = this.selectTamano();
+  },
+  updated() {
+    this.show = this.ocultarMethod();  
+    this.tamanoRoute = this.selectTamano();
+  },
+  computed:{
+      currentRouteName() {
+        return this.$route.name;
+      },
+      selectTamano(){
+        if (this.currentRouteName() =='home') {
+          return 0;
+        }
+        else if(this.currentRouteName() =='tablero') {
+          return 5;
+        }
+        else{
+          return 0;
+        }
       }
-    },
+
+  },
+  mounted() {
+    this.tamanoRoute = this.selectTamano();
+    this.show = this.ocultarMethod();  
   },
   data() {
     return {
       show : 'true',
+      baseURL: "http://localhost:3000/api",
+      tamanoRoute : 0,
     }
   },
 }
@@ -89,8 +107,16 @@ export default {
     background-color: #9F9FED !important ;
      color: white !important ;
   }
+  .color6{
+    background-color: rgb(160, 0, 0) !important ;
+     color: white !important ;
+  }
+  .color6:hover{
+    background-color: red !important  ;
+    color: white !important ;
+  }
 
-  
+
 
   .margen{
     margin-right: 10px;
@@ -122,5 +148,6 @@ export default {
   .roboto{
     font-family: 'Roboto', sans-serif;
   }
+
 
 </style>

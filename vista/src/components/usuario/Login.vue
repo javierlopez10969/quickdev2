@@ -37,6 +37,10 @@
     import axios from 'axios';
     export default {
     name: 'Login',
+    
+    props: {
+        botones : Boolean
+    },  
     data() {
         return {
             user:{
@@ -47,6 +51,13 @@
             error: '',
         }
     },
+    created() {
+        if (localStorage.getItem('token') === null) {
+            console.log('hola')
+        }else{
+            this.$router.push('/home');
+        }
+    },
     methods: {
         login() {
         axios.post('http://localhost:3000/api/login', this.user)
@@ -54,7 +65,8 @@
             //if successfull
             if (res.status === 200) {
                 localStorage.setItem('token', res.data.token);
-                this.$router.push( {path:'/home'});
+                //this.$bus.$emit('logged', 'User logged')
+                this.$router.push({ path: '/home' });
             }
             }, err => {
                 alert('fail');

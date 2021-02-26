@@ -66,16 +66,16 @@ proyectRoute.route('/delete-proyect/:id').delete((req, res, next) => {
 //Faker usuario
 proyectRoute.get('/faker-proyect', async (req, res) => {
   console.log("Ruta de fakers");
-  for (let i = 0; i < 100 ; i++) {
+  for (let i = 0; i < 10 ; i++) {
       await proyectModel.create({
-          name : faker.name.findName(),
-          email: faker.internet.email(),
-          gender: faker.name.gender() ,
-          phone: faker.phone.phoneNumber()
+          titulo : faker.lorem.sentence(),
+          especialista: faker.name.jobTitle(),
+          requisito: faker.lorem.sentence(),
+          contenido: faker.lorem.paragraph()
 
       })
   }
-  res.send('Creando 100 proyects faker');
+  res.send('Creando 10 proyects faker');
 });
 
 

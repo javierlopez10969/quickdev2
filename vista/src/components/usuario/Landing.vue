@@ -6,6 +6,12 @@
      <button class="btn btn-lg color4 rounded-pill" 
      type="submit" 
      @click="logout()">Logout</button>
+
+    <!-- Boton 1 -->
+        <a class="btn btn-default color3 rounded-pill"  href="/home" role="button" >home</a>
+    <!-- Boton 2 -->
+        <a class="btn btn-default color3 rounded-pill " href="/tablon" role="button">TABLON</a>
+        
   </div>
 </template>
 <script>
