@@ -9,7 +9,6 @@ const express = require('express'),
 const app = express();
 
 //RUTAS
-const studentAPI = require('../backend/routes/student.route');
 const userAPI = require('../backend/routes/user.route');
 const pruebaAPI = require('../backend/routes/api.route');
 const proyectAPI = require('../backend/routes/proyect.route');
@@ -34,7 +33,6 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 
 // API
-app.use('/api', studentAPI)
 app.use('/api', userAPI)
 app.use('/api', proyectAPI)
 //app.use('/api', permissionAPI)

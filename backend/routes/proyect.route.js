@@ -38,6 +38,7 @@ proyectRoute.route('/edit-proyect/:id').get((req, res) => {
 
 // Update proyect
 proyectRoute.route('/update-proyect/:id').post((req, res, next) => {
+  
   proyectModel.findByIdAndUpdate(req.params.id, {
     $set: req.body
   }, (error, data) => {
@@ -69,7 +70,7 @@ proyectRoute.get('/faker-proyect', async (req, res) => {
   for (let i = 0; i < 10 ; i++) {
       await proyectModel.create({
           titulo : faker.lorem.sentence(),
-          especialista: faker.name.jobTitle(),
+          cliente: faker.name.jobTitle(),
           requisito: faker.lorem.sentence(),
           contenido: faker.lorem.paragraph()
 

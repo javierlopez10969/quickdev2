@@ -1,9 +1,12 @@
 <template>
  <div class="container-fluid">
-
     <!-- barra superior -->
-    <div class="row color1">
-        <nav class="navbar navbar-expand-sm navbar-dark color1">
+        <div class="row color1">
+            <nav class="navbar navbar-expand-sm" >
+                        
+            <div v-if="!botones">          
+                    <span class="navbar-toggler-icon"></span>
+            </div>
             <!-- Brand/logo -->
             <a class="navbar-brand" href="/" >
                 <img src="https://i.ibb.co/g9T9mMH/quickdev.png"  alt="quickdev"  height="60"/>
@@ -31,7 +34,6 @@
 
             </div>
             <ul class="nav navbar-nav navbar-right"  v-if="botones">
-                {{botones}}
                 <!-- Boton Iniciar Sesion -->
                     <a class="btn btn-default color2 rounded-pill"  href="/login" role="button" >Iniciar Sesión</a>
                 <!-- Boton Registrarse -->
@@ -41,14 +43,14 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right"  v-if="!botones">
-                {{botones}}
-                    <button class="btn btn-default color6 rounded-pill center-text"  type="submit" @click="logout()"> <i class="bi bi-power"></i>Cerrar Sesión</button>
+                <button class="btn btn-default color6 rounded-pill center-text"  type="submit" @click="logout()"> <i class="bi bi-power"></i>Cerrar Sesión</button>
             </ul>
 
-        </nav>
-        
+        </nav>        
     </div>
-    </div>       
+    
+    </div>  
+  
 </template>
 
 
@@ -99,20 +101,6 @@ estilo de colores (pude ser HEX)   ej #FFFFFF
         justify-content: center;
         align-items: center;
     }
-    .carousel .item {
-        height: 500px;
-        margin: auto;
-    }
-    .carousel-inner {
-        padding-top:70px; 
-        overflow:hidden;
-    }
-
-    .carousel-caption {
-        top: -70px;
-        bottom: auto;
-        background: rgba(0, 0, 0, 0);
-    }
 
 
     .item img {
@@ -121,28 +109,43 @@ estilo de colores (pude ser HEX)   ej #FFFFFF
         margin: auto;
         object-fit: contain;
     }
+    /* The sidebar menu */
+    .sidenav {
+        height: 100%; /* Full-height: remove this if you want "auto" height */
+        width: 160px; /* Set the width of the sidebar */
+        position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+        z-index: 1; /* Stay on top */
+        top: 0;
+        left: 0;
+        background-color: #111; /* Black*/
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 60px; /* Place content 60px from the top */
+        transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+  }
 
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-        height: 100px;
-        width: 100px;
-        outline: black;
-        background-size: 100%, 100%;
-        border-radius: 50%;
-        border: 1px solid black;
-        background-image: none;
+    /* The navigation menu links */
+    .sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    display: block;
     }
 
-    .carousel-control-next-icon:after
-    {
-        content: '>';
-        font-size: 55px;
-        color: red ;
+    /* When you mouse over the navigation links, change their color */
+    .sidenav a:hover {
+        color: #f1f1f1;
     }
 
-    .carousel-control-prev-icon:after {
-        content: '<';
-        font-size: 55px;
-        color: red ;
+    /* Style page content */
+    .main {
+    margin-left: 160px; /* Same as the width of the sidebar */
+    padding: 0px 10px;
     }
+
+    /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+    @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+    }
+
  </style> 

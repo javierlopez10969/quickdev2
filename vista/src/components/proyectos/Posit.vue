@@ -1,12 +1,17 @@
 <template>
-    <div  class="contenedor"> 
-        <div h1>
-            <img src="https://i.ibb.co/6P44Zc9/Rectangle-12.png" alt="Rectangle-12" />
-        </div>
+    <div class="contenedor" > 
+        <img hre src="https://i.ibb.co/6P44Zc9/Rectangle-12.png" alt="Rectangle-12" width="250" height="250" />
         <div class="texto-encima">
-        Titulo : {{name}}
-        Descripcion :  {{description.slice(0,30)}}
-        Especialista : {{author}}
+
+            <div class = "color7">
+                <h4>{{titulo.slice(0,20)}} ...</h4>
+                <h5>{{contenido.slice(0,30)}}...</h5>
+                <h6> Cliente :{{cliente}}</h6>
+            </div>
+            <router-link 
+            :to="{name: 'proyecto', params: { id: id}}" 
+            class="btn btn-succes color6 rounded-pill">Ver Proyecto
+            </router-link>
         </div>
     </div>
     
@@ -16,39 +21,30 @@
 
 <script>
 export default {
-    props: ['name','description','author','id'],
+    props: [
+        'id',
+        'titulo',
+        'cliente',
+        'postulantes',
+        'especialista',
+        'contenido',
+        'requisito'],
     data() {
         return {
-            proyecto : {
-                nombre: this.name,
-                descripcion : this.description,
-                autor: this.author,
-            }
-            
         }
+    },
+    computed(){
+
     },
     created() {
     },
     methods: {
-        setValores(nombre,descripcion,autor){
-            this.nombre = nombre;
-            this.autor = autor;
-            this.descripcion = descripcion;
-        },
-        batdau(nombre) {
-            this.nombre = nombre;
-        }
         
     },
     updated() {
         
     },
     mounted() {
-        
-        this.$on('applied', (name) => {
-            alert(name);
-            this.name = 'Romeo';
-        })
         
     },
 }

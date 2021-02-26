@@ -115,6 +115,11 @@ export default {
     background-color: red !important  ;
     color: white !important ;
   }
+  .color7:{
+
+    background-color: #9F9FED !important;
+    color: #736CED !important;
+  }
 
 
 

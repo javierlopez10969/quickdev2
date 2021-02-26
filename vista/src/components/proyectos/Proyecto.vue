@@ -1,8 +1,48 @@
 <template>
     
-    <div class="container-fluid text-center">
+    <div row class="container-fluid text-center">
+        <div col>
 
+        </div>
+        <div col class="container-fluid ventana ">
+            <!--  @submit.prevent="handleUpdateForm"-->
+            <form>
+                            PROYECTO 
+                <h1>{{proyect.titulo}}</h1>
+                <h2> Cliente : {{proyect.titulo}} </h2>
+                <h6>
+                <p>{{proyect.contenido}}
+                        </p> 
+                </h6>
+                <h2>
+                    <p> 
+
+                    Postulantes data: 
+                    </p>
+                    {{postulantes}}
+                    <p> 
+
+                    Postulantes proyect : 
+                    </p>
+                    {{proyect.postulantes}}
+                </h2>
+                <div class="form-group">
+                    <div class="form-group text-center">
+                        <button class="btn btn-lg color4 rounded-pill" type="submit" 
+                        @click="actualizarPostulantes()" > Postular</button>
+                    </div>    
+                </div>
+
+            </form>
+
+
+
+        </div>
+        <div col></div>
+
+        <!--
         <div class="col ventana">
+
             <form>
                 <fieldset disabled>
                     <legend>Disabled fieldset example</legend>
@@ -30,10 +70,45 @@
                 </fieldset>
                 </form>
         </div>
+        -->
 
     </div> 
 </template>
+<script>
+import axios from "axios";
+    export default {
+        data() {
+            return {
+                proyect: { },
+                postulantes: [''],
 
+
+            }
+        },        
+        created() {
+            let apiURL = `http://localhost:3000/api/edit-proyect/${this.$route.params.id}`;
+            axios.get(apiURL).then((res) => {
+                this.proyect = res.data;
+            })
+            this.postulantes = this.proyect.postulantes;
+        },
+        methods: {
+            handleUpdateForm() {
+                let apiURL = `http://localhost:3000/api/update-proyect/${this.$route.params.id}`;
+                axios.post(apiURL, this.proyect).then((res) => {
+                    console.log(res)
+                // this.$router.push('/view')
+                }).catch(error => {
+                    console.log(error)
+                });
+            },
+            actualizarPostulantes(){
+                this.postulantes.push('Hola')
+                this.proyect.postulantes.push("hola")
+            }
+        }    
+    }
+</script>
 <style>
     body, html {
     padding: 0;
@@ -74,28 +149,6 @@
     .mostrar {
         display: block;
     }
-    /*
-    html,
-    body {
-        height: 100%;
-    }
-
-    body {
-        display: -ms-flexbox;
-        display: -webkit-box;
-        display: flex;
-        -ms-flex-align: center;
-        -ms-flex-pack: center;
-        -webkit-box-align: center;
-        align-items: center;
-        -webkit-box-pack: center;
-        justify-content: center;        
-        padding-top: 40px;
-        padding-bottom: 40px;
-        background: linear-gradient(0deg, #A7C957 -12.51%, rgba(255, 255, 255, 0) 85.81%), #F9F6F7;        
-        background-repeat: repeat-y;
-    }
-    */
 
     .ventana{
         width: 540.93px;

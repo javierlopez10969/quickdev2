@@ -41,7 +41,7 @@ const routes = [
     name: 'logeado',
     component: () => import('../components/usuario/Landing')
   },
-  
+  //PROYECTOS  
   {
     path: '/tablon',
     name: 'tablero',
@@ -49,10 +49,10 @@ const routes = [
   },
   
   {
-    path: '/proyecto',
+    path: '/proyecto/:id',
     name: 'proyecto',
     component: () => import('../components/proyectos/Proyecto')
-  }
+  },
   
 ]
 

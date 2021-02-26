@@ -13,26 +13,11 @@ router.get('/', function (req, res) {
 });
 
 // Import Cada controlador
-var contactController = require('../controllers/contactController');
 var tableController = require('../controllers/tableController');
 var rolController = require('../controllers/rolController');
 var proyectController = require('../controllers/proyectController');
 var platformController = require('../controllers/platformController');
 var permissionController = require('../controllers/permissionController');
-
-
-// Contact routes
-//Ejemmplo
-router.route('/contacts')
-    .get(contactController.index);
-router.route('/contacts/create') 
-    .post(contactController.new);
-router.route('/contacts/:contact_id')
-    .get(contactController.view)
-    .patch(contactController.update)
-    .put(contactController.update);
-router.route('/contacts/delete/:contact_id') 
-    .delete(contactController.delete);
 
 
 // Rutas de tabla

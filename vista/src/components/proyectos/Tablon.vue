@@ -2,15 +2,32 @@
     <div>
         <row v-for="proyect in Proyects" :key="proyect._id">
             <Posit
-                v-bind:name="proyect.titulo"
-                v-bind:author="proyect.especialsita"
-                v-bind:description="proyect.contenido"
+                v-bind:titulo="proyect.titulo"
+                v-bind:cliente="proyect.cliente"
+                v-bind:contenido="proyect.contenido"
                 v-bind:id="proyect._id">
             </Posit>
         </row>
     </div>
 </template>
 <script>
+    /*
+    // Setup schema
+    let proyectSchema = mongoose.Schema({
+        //Titulo del proyecto
+        titulo: {type: String,required: true},
+        //Cliente solicitante del proyecto : id
+        cliente: {type: String},
+        //Postulantes array con todos los id
+        postulantes:{type: Array},
+        //Especialista que se ha adjudicado el proyecto  
+        especialista: {type: String},
+        //Descripción del proyecto
+        contenido: {type: String,required: true},
+        requisito:{type: String},
+        create_date: {type: Date,default: Date.now}
+    });
+    */
     import axios from "axios";
     import Posit from './Posit.vue';
     export default {

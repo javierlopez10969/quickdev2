@@ -1,30 +1,23 @@
 // Proyect.js
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
+
 // Setup schema
 let proyectSchema = mongoose.Schema({
-    titulo: {
-        type: String,
-        required: true
-    },
-    especialista: {
-        type: String
-    },
-    requisito:{
-        type: String
-    },
-    contenido: {
-        type: String,
-        required: true
-    },
-
-    create_date: {
-        type: Date,
-        default: Date.now
-    }
+    //Titulo del proyecto
+    titulo: {type: String,required: true},
+    //Cliente solicitante del proyecto : id
+    cliente: {type: String},
+    //Postulantes array con todos los id
+    postulantes:{type: Array},
+    //Especialista que se ha adjudicado el proyecto  
+    especialista: {type: String},
+    //Descripción del proyecto
+    contenido: {type: String,required: true},
+    requisito:{type: String},
+    create_date: {type: Date,default: Date.now}
 });
 
-// Export rol model
-var Proyect = module.exports = mongoose.model('proyect',proyectSchema);
-    module.exports.get = function (callback, limit) {
-    Proyect.find(callback).limit(limit);
-}
+proyectSchema.plugin(uniqueValidator, { message: 'Error, esperaba {PATH} único.' });
+// Export
+module.exports = mongoose.model('Proyect', proyectSchema);

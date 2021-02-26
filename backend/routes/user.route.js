@@ -4,17 +4,13 @@ const bodyParser = require('body-parser');
 const userRoute = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-
 //Faker
 const faker = require('faker');
-
 // Modelo de usuario
 const userModel = require('../models/User');
 
-// Hash Contraseña
-const saltRounds = 10;
-var BCRYPT_SALT_ROUNDS = 12;
 
+//RUTAS MAS CONTROLADOR
 //GET para mostrar usuarios
 userRoute.route('/users').get((req, res) => {
   console.log('Usuarios')
@@ -26,51 +22,6 @@ userRoute.route('/users').get((req, res) => {
    }
  })
 })
-
-//Crear usuario en post 1
-function encriptar(user, pass) {
-  var crypto = require('crypto')
-  // usamos el metodo CreateHmac y le pasamos el parametro user y actualizamos el hash con la password
-  var hmac = crypto.createHmac('sha1', user).update(pass).digest('hex')
-  return hmac
-}
-/*
-userRoute.route('/registrar').post((req, res , next) => {
-  res.send('Api / registrar')
-  console.log('Api / registrar')
-  //Obtenemos los datos username y password
-  var username = req.body.username
-  var password = req.body.pass
-  var existe = true
-  //Encriptamos por medio de una función la contraseña 
-  var passEncriptada = encriptar(username, password)
-  //Buscamos si el usuario existe
-  userModel.findOne({username:username},function(err, user){
-     if(!user) {
-       existe = false
-       req.body.pass = passEncriptada;
-     }
-     else{
-        exite = true
-        console.log('')
-        res.send('Ya existe un usuario con ese nombre')
-     }
-        
-  })
-
-  userModel.create(req.body, (error, data) => {  
-    if (error ) {
-      console.log("Ha ocurrido un error en el post")
-      return next(error)
-    } else if(!existe) {
-      res.json(data)
-    }
-  })
-}
-);
-*/
-
-
 userRoute.route('/registrar').post((req, res , next) => {
     console.log('Api / registrar')
     const newUser = new userModel({
