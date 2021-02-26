@@ -55,7 +55,7 @@
                             <input class="form-control rounded-pill" placeholder="Contraseña" type="password" v-model="user.pass" required name="password" >
                         </div> 
                         <div class="form-group input-group">
-                            <input class="form-control rounded-pill" id="passbox" placeholder="Repetir contraseña" type="password" v-model="pass" oninput="checkPassword()" @keypress="checkPassword()"  @change="checkPassword()" required   >
+                            <input class="form-control rounded-pill" id="passbox" placeholder="Repetir contraseña" type="password" v-model="pass" required   >
                         </div>                                      
                         <div class="form-group text-center">
                             <button class="btn btn-lg color4 rounded-pill" type="submit"  @click="checkPassword()">Crear cuenta</button>
@@ -118,6 +118,7 @@
                   } 
                  //
                 }).catch(error => {
+                    alert(error)
                     console.log(error)
                 });
             },
@@ -229,4 +230,5 @@
     
 
 </style>
+
 

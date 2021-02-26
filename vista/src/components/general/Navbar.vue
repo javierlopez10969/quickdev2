@@ -27,15 +27,19 @@
                 </ul>
 
             </div>
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Boton Iniciar Sesion -->
-                        <a class="btn btn-default color2 rounded-pill" href="/login" role="button">Iniciar Sesión</a>
-                    <!-- Boton Registrarse -->
-                    <div class="col-sm button ">
-                        <a class="btn btn-default color2 rounded-pill " href="/registrar" role="button">Registrarse</a>
-                    </div>
+            <ul class="nav navbar-nav navbar-right"  v-if="botones">
+                <!-- Boton Iniciar Sesion -->
+                    <a class="btn btn-default color2 rounded-pill"  href="/login" role="button" >Iniciar Sesión</a>
+                <!-- Boton Registrarse -->
+                <div class="col-sm button ">
+                    <a class="btn btn-default color2 rounded-pill " href="/registrar" role="button">Registrarse</a>
+                </div>
 
-                </ul>
+            </ul>
+            <ul v-else>
+                
+                    <a class="btn btn-default color2 rounded-pill"  href="/home" role="button" > Zapallo</a>
+            </ul>
 
         </nav>
         
@@ -43,6 +47,45 @@
     </div>       
 </template>
 
+<script>
+export default {
+    methods: {
+    //user is not authorized
+
+   
+    },
+    computed:{
+        ocultar() {
+        let botones = true ;
+        if (localStorage.getItem('token') === null) {
+            botones = true
+        }else{
+            botones = false
+        }
+        return botones;
+
+        }
+    },
+    data() {
+        return {
+            botones: true,
+            //usuario : ,
+        }
+    },
+    /*
+    watch :{
+        botones = ocultar();
+
+    },*/
+    mounted() {
+        this.botones = this.ocultar()
+    },
+    created(){
+        this.ocultar()
+    }
+
+}
+</script>
 
 <!--CSS
 estilo de colores (pude ser HEX)   ej #FFFFFF 

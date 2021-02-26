@@ -34,6 +34,42 @@ function encriptar(user, pass) {
   var hmac = crypto.createHmac('sha1', user).update(pass).digest('hex')
   return hmac
 }
+/*
+userRoute.route('/registrar').post((req, res , next) => {
+  res.send('Api / registrar')
+  console.log('Api / registrar')
+  //Obtenemos los datos username y password
+  var username = req.body.username
+  var password = req.body.pass
+  var existe = true
+  //Encriptamos por medio de una función la contraseña 
+  var passEncriptada = encriptar(username, password)
+  //Buscamos si el usuario existe
+  userModel.findOne({username:username},function(err, user){
+     if(!user) {
+       existe = false
+       req.body.pass = passEncriptada;
+     }
+     else{
+        exite = true
+        console.log('')
+        res.send('Ya existe un usuario con ese nombre')
+     }
+        
+  })
+
+  userModel.create(req.body, (error, data) => {  
+    if (error ) {
+      console.log("Ha ocurrido un error en el post")
+      return next(error)
+    } else if(!existe) {
+      res.json(data)
+    }
+  })
+}
+);
+*/
+
 
 userRoute.route('/registrar').post((req, res , next) => {
     console.log('Api / registrar')
@@ -41,12 +77,13 @@ userRoute.route('/registrar').post((req, res , next) => {
       email: req.body.email,
       username: req.body.username ,
       name: req.body.name,
-      pass: bcrypt.hashSync(req.body.password, 10),
+      pass: bcrypt.hashSync(req.body.pass, 10),
       gender: req.body.gender,
       phone: req.body.phone
     })
     //Obtenemos los datos username y password
-    
+    const correo = req.body.email
+    const password =  newUser.pass
     console.log('Pass original  :' + req.body.pass +'  Pass encriptada  :'+ password)
     var existe = true
     //Encriptamos por medio de una función la contraseña 
@@ -62,7 +99,7 @@ userRoute.route('/registrar').post((req, res , next) => {
         }
         else{
             exite = true;
-            console.log('No existe usuario')
+            console.log('Usuario ya existe')
         }  
     })
 
@@ -70,8 +107,13 @@ userRoute.route('/registrar').post((req, res , next) => {
       if (error) {
         return next(error)
       } else {
-        
-        res.json(data) 
+        if(existe == false){
+          res.json(data) 
+        }
+        return res.status(400).json({
+          title: 'Usuario ya existe',
+          error: ''
+        })
       }
     })
   }
