@@ -41,6 +41,8 @@ const routes = [
     name: 'logeado',
     component: () => import('../components/usuario/Landing')
   },
+
+
   //PROYECTOS  
   {
     path: '/tablon',
@@ -53,6 +55,11 @@ const routes = [
     name: 'proyecto',
     component: () => import('../components/proyectos/Proyecto')
   },
+  {
+    path: '/post',
+    name: 'postear',
+    component: () => import('../components/proyectos/RegistrarProyecto')
+  }
   
 ]
 

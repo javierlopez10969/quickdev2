@@ -83,14 +83,13 @@
     export default {
         data() {
             return {
-                user: {
-                    
+                user: {                    
                     username: '', 
-                   name: '',
-                   email: '',
-                   gender: '',
-                   phone: '',
-                   pass: '',
+                    name: '',
+                    email: '',
+                    gender: '',
+                    phone: '',
+                    pass: '',
                     
                 },
                 pass: ''
@@ -187,28 +186,6 @@
     .mostrar {
         display: block;
     }
-    /*
-    html,
-    body {
-        height: 100%;
-    }
-
-    body {
-        display: -ms-flexbox;
-        display: -webkit-box;
-        display: flex;
-        -ms-flex-align: center;
-        -ms-flex-pack: center;
-        -webkit-box-align: center;
-        align-items: center;
-        -webkit-box-pack: center;
-        justify-content: center;        
-        padding-top: 40px;
-        padding-bottom: 40px;
-        background: linear-gradient(0deg, #A7C957 -12.51%, rgba(255, 255, 255, 0) 85.81%), #F9F6F7;        
-        background-repeat: repeat-y;
-    }
-    */
 
     .ventana{
         width: 540.93px;

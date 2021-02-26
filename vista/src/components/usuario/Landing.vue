@@ -9,14 +9,31 @@
         id _  {{user._id}}
       </p>
     </h1>
+    <h1>
+
      <button class="btn btn-lg color4 rounded-pill" 
      type="submit" 
      @click="logout()">Logout</button>
+    </h1>
+
+    <div col>
+      <div >
 
     <!-- Boton 1 -->
         <a class="btn btn-default color3 rounded-pill"  href="/home" role="button" >home</a>
+      </div>
+      <div>
+
     <!-- Boton 2 -->
         <a class="btn btn-default color3 rounded-pill " href="/tablon" role="button">TABLON</a>
+      </div>
+      <div>
+
+    <!-- Boton 2 -->
+        <a class="btn btn-default color3 rounded-pill " href="/post" role="button">Crear proyecto</a>
+      </div>
+    </div>
+
         
   </div>
 </template>

@@ -10,11 +10,14 @@ let proyectSchema = mongoose.Schema({
     cliente: {type: String},
     //Postulantes array con todos los id
     postulantes:{type: Array},
+    //Etiquetas que uno le puede añadir a su proyecyo
+    tags:{type:Array},
     //Especialista que se ha adjudicado el proyecto  
     especialista: {type: String},
     //Descripción del proyecto
     contenido: {type: String,required: true},
     requisito:{type: String},
+
     create_date: {type: Date,default: Date.now}
 });
 
