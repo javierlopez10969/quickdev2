@@ -10,42 +10,18 @@
                     <h2 class="card-title text-center">Crear proyecto</h2>
                     <form @submit.prevent="handleSubmitForm">
                         <div class="form-group input-group">
-                            <input name="" class="form-control rounded-pill" placeholder="Nombre de usuario" type="text"  required>
+                            <input name="" class="form-control rounded-pill" placeholder="Titulo del proyecto" v-model="proyect.titulo" type="text"  required>
                         </div> 
                         <div class="form-group input-group">
-                            <input name="" class="form-control rounded-pill" placeholder="Nombre" type="text"  required>
+                            <input name="" class="form-control rounded-pill" placeholder="Descripción" type="text" v-model="proyect.contenido"  required>
                         </div> 
-                        <div class="form-group input-group">
-                            <input name="" class="form-control rounded-pill" placeholder="Correo electrónico" type="email"  required>
-                        </div> 
-                        <div class="form-group input-group">
-                            <select class="custom-select rounded-pill" style="max-width: 120px;">
-                                <option selected="">+569</option>
-                                <option value="1">+562</option>
-                            </select>
-                            <input name="" class="form-control rounded-pill" placeholder="Número teléfono" type="text"  required>
-                        </div> 
-                        <div class="form-group input-group rounded-pill">
-
-                            <select class="form-control rounded-pill "  required >
-                                <option hidden selected disabled value="">Selecciona un género</option>
-                                <option>Hombre</option>
-                                <option>Mujer</option>
-                                <option>Haitiano</option>
-                                <option>Otro</option>
-                                <option>Prefiero no decirlo</option>
-                            </select>
-                        </div>
-                        <div class="form-group input-group">
-                            <input class="form-control rounded-pill" placeholder="Contraseña" type="password"  required name="password" >
-                        </div> 
-                        <div class="form-group input-group">
-                            <input class="form-control rounded-pill" id="passbox" placeholder="Repetir contraseña" type="password" required   >
-                        </div>                                      
+                        <div class="container-fluid">
+                            <Tags 
+                            v-bind:etiquetas.sync="proyect.etiquetas"></Tags>  
+                        </div>  
                         <div class="form-group text-center">
-                            <button class="btn btn-lg color4 rounded-pill" type="submit"  @click="checkPassword()">Crear cuenta</button>
-                        </div>     
-                        <p class="text-center">¿Ya tienes cuenta?  <a href="/login">Inicia sesión aquí</a> </p>                                                                 
+                            <button class="btn btn-lg color4 rounded-pill" type="submit">Crear proyecto</button>
+                        </div>                                                                     
                         </form>
                 </article>   
 
@@ -57,27 +33,40 @@
     </div> 
 </template>
 <script>
+import Tags from './Tags.vue'
 import axios from "axios"
 export default {
+    props:[
+        'usuario',
+    ],
+    components:{
+        Tags
+    },
     data() {
         return {
-            
+            proyect:{
+                titulo:'',  
+                cliente : '',
+                postulantes :[],
+                etiquetas: [],
+                id :'',
+                tags : [],
+                especialista : '',
+                contenido :'',
+                requisito : ''
+            }
         }
+    },
+    created() {
+        this.id = this.usuario._id;
+        this.cliente = this.usuario.nombre;
     },
     methods: {
         handleSubmitForm() {
             let apiURL = 'http://localhost:3000/api/create-proyect';
-            axios.post(apiURL, this.user).then(() => {
+            axios.post(apiURL, this.proyect).then(() => {
                 //this.$router.push('/view')
-                this.user = {
-                    username:'',  
-                    name: '',
-                    email: '',
-                    gender: '',
-                    pass: '',
-                    phone: '',
-                } 
-                //
+                //Mostar mensaje de proyecto creado
             }).catch(error => {
                 alert(error)
                 console.log(error)

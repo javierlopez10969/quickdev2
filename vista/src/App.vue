@@ -5,7 +5,7 @@
     <div class="container mt-5">
       
   {{ currentRouteName }} Tamano : {{tamanoRoute}}
-  {{usuario.name}}
+  {{usuario.name}} {{usuario._id}}
     </div>
     <div v-if="tamanoRoute===0" class="container mt-5">
       <!-- v-on:update:usuario="usuario = $event" -->
