@@ -1,14 +1,32 @@
 <template>
  <div class="container-fluid">
+
     <!-- barra superior -->
-        <div class="row color1">
+        <div class="row color1" >
+
+
+                     
+            
             <nav class="navbar navbar-expand-sm" >
-                        
+            <div row>
+
+            </div>
+            <!--sidebar opcional-->
+            <div row class="" v-if="!botones">
+                
+                <Sidebar
+                v-bind:usuario=user
+                >
+
+                </Sidebar>
+
+
+            </div>    
+
+
+
             <!-- Brand/logo -->
-            <a class="navbar-brand" href="/" v-if="botones" >
-                <img src="https://i.ibb.co/g9T9mMH/quickdev.png"  alt="quickdev"  height="60"/>
-            </a>
-            <a class="navbar-brand" href="/home" v-if="!botones" >
+            <a class="navbar-brand" href="/home" >
                 <img src="https://i.ibb.co/g9T9mMH/quickdev.png"  alt="quickdev"  height="60"/>
             </a>
             <!-- Links -->
@@ -55,8 +73,9 @@
                 </div>
             </ul>
 
-        </nav>        
-    </div>
+            </nav>        
+        </div>
+    
     
     </div>  
   
@@ -64,7 +83,12 @@
 
 
 <script>
+
+import Sidebar from './Sidebar.vue';
 export default {
+    components:{
+        Sidebar,
+    },
     methods: {  
         logout() {
             localStorage.clear();

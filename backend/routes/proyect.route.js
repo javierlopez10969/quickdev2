@@ -17,6 +17,7 @@ proyectRoute.route('/proyects').get((req, res) => {
  })
 })
  proyectRoute.route('/create-proyect').post((req, res, next) => {
+   console.log('Creando proyecto Nombre : ' + req.titulo + "  Cliente : " + req.titulo )
     proyectModel.create(req.body, (error, data) => {
     if (error) {
       return next(error)

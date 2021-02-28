@@ -1,16 +1,27 @@
 <template>
     <div class="contenedor" > 
         <img hre src="https://i.ibb.co/6P44Zc9/Rectangle-12.png" alt="Rectangle-12" width="250" height="250" />
-        <div class="texto-encima">
+        <div class="centrado text-center color7">
 
-            <div class = "color7">
-                <h4>{{titulo.slice(0,20)}} ...</h4>
-                <h5>{{contenido.slice(0,30)}}...</h5>
-                <h6> Cliente :{{cliente}}</h6>
+            <div class = "text-center color7">
+                <div>
+
+                    <h4>{{titulo.slice(0,20)}} ...</h4>
+                </div>
+                <div>
+                    <h5>{{contenido.slice(0,30)}}...</h5>
+                </div>
+                <div>
+                    <h5> Cliente :{{cliente}}</h5>
+                </div>
             </div>
+
+        </div>
+
+        <div class="texto-encima">
             <router-link 
             :to="{name: 'proyecto', params: { id: id}}" 
-            class="btn btn-succes color6 rounded-pill">Ver Proyecto
+            class="btn btn-succes color6 bottom rounded-pill">Ver Proyecto
             </router-link>
         </div>
     </div>

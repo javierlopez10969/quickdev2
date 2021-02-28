@@ -12,17 +12,23 @@
                         <div class="form-group input-group">
                             <input name="" class="form-control rounded-pill" placeholder="Titulo del proyecto" v-model="proyect.titulo" type="text"  required>
                         </div> 
-                        <div class="form-group input-group">
-                            <input name="" class="form-control rounded-pill" placeholder="Descripción" type="text" v-model="proyect.contenido"  required>
-                        </div> 
+                        <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Describa su proyecto</label>
+                            <textarea class="form-control rounded" id="exampleFormControlTextarea1"  placeholder="Descripción" v-model="proyect.contenido" rows="3" required></textarea>
+                        </div>
+                        <!--Componente de tags-->
                         <div class="container-fluid">
                             <Tags 
-                            v-bind:etiquetas.sync="proyect.etiquetas"></Tags>  
+                            v-bind:etiquetas.sync="proyect.etiquetas">
+                            </Tags>  
                         </div>  
+                        <!--fIN Componente de tags-->
+                        
                         <div class="form-group text-center">
-                            <button class="btn btn-lg color4 rounded-pill" type="submit">Crear proyecto</button>
+                            <button class="btn btn-lg color4 rounded-pill" type="submit" @click="handleSubmitForm()">Crear proyecto</button>
                         </div>                                                                     
-                        </form>
+                    </form>
+
                 </article>   
 
             </form>
@@ -58,8 +64,8 @@ export default {
         }
     },
     created() {
-        this.id = this.usuario._id;
-        this.cliente = this.usuario.nombre;
+        this.proyect.id = this.usuario._id;
+        this.proyect.cliente = this.usuario.nombre;
     },
     methods: {
         handleSubmitForm() {
@@ -67,6 +73,18 @@ export default {
             axios.post(apiURL, this.proyect).then(() => {
                 //this.$router.push('/view')
                 //Mostar mensaje de proyecto creado
+                this.proyect ={
+                    titulo:'',  
+                    cliente : '',
+                    postulantes :[],
+                    etiquetas: [],
+                    id :'',
+                    tags : [],
+                    especialista : '',
+                    contenido :'',
+                    requisito : ''
+                }
+
             }).catch(error => {
                 alert(error)
                 console.log(error)

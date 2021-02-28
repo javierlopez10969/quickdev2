@@ -24,14 +24,21 @@
                     <article class="card-body mx-auto" style="max-width: 400px;">
                         <h4 class="card-title text-center">Crear cuenta</h4>
                         <form @submit.prevent="handleSubmitForm">
-                        <div class="form-group input-group">
-                            <input name="" class="form-control rounded-pill" placeholder="Nombre de usuario" type="text" v-model="user.username" required>
-                        </div> 
+
                         <div class="form-group input-group">
                             <input name="" class="form-control rounded-pill" placeholder="Nombre" type="text" v-model="user.name" required>
                         </div> 
                         <div class="form-group input-group">
+                            <input name="" class="form-control rounded-pill" placeholder="Apellido" type="text" v-model="apellido" required>
+                        </div> 
+                        <div class="form-group input-group">
+                            <input name="" class="form-control rounded-pill" placeholder="Nombre de la empresa" type="text" v-model="apellido" required>
+                        </div> 
+                        <div class="form-group input-group">
                             <input name="" class="form-control rounded-pill" placeholder="Correo electrónico" type="email" v-model="user.email" required>
+                        </div> 
+                        <div class="form-group input-group">
+                            <input name="" class="form-control rounded-pill" placeholder="R.U.T." type="text" v-model="user.username" required>
                         </div> 
                         <div class="form-group input-group">
                             <select class="custom-select rounded-pill" style="max-width: 120px;">
@@ -40,17 +47,16 @@
                             </select>
                             <input name="" class="form-control rounded-pill" placeholder="Número teléfono" type="text" v-model="user.phone" required>
                         </div> 
+
                         <div class="form-group input-group rounded-pill">
 
-                            <select class="form-control rounded-pill " v-model="user.gender" required >
-                                <option hidden selected disabled value="">Selecciona un género</option>
-                                <option>Hombre</option>
-                                <option>Mujer</option>
-                                <option>Haitiano</option>
-                                <option>Otro</option>
-                                <option>Prefiero no decirlo</option>
+                            <select class="form-control rounded-pill " v-model="user.role" required >
+                                <option hidden selected disabled value="">Selecciona una especialidad </option>
+                                <option>Cliente</option>
+                                <option>Especialista</option>
                             </select>
                         </div>
+
                         <div class="form-group input-group">
                             <input class="form-control rounded-pill" placeholder="Contraseña" type="password" v-model="user.pass" required name="password" >
                         </div> 
@@ -90,9 +96,11 @@
                     gender: '',
                     phone: '',
                     pass: '',
+                    role: '',
                     
                 },
-                pass: ''
+                pass: '',
+                apellido: '',
             }
         },
         computed: {
@@ -105,6 +113,7 @@
                 let apiURL = 'http://localhost:3000/api/registrar';
                 this.pass = '';
                 this.limpiarMensaje();
+                this.user.name = this.user.name + ' ' + this.apellido; 
                 axios.post(apiURL, this.user).then(() => {
                   //this.$router.push('/view')
                   this.user = {
@@ -189,7 +198,7 @@
 
     .ventana{
         width: 540.93px;
-        height: 800px;
+        height: 900px;
         left: 482px;
         top: 26px;
 

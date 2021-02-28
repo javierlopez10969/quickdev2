@@ -1,13 +1,16 @@
 <template>
     <div>
         <h6> Añada sus etiquetas</h6>
-
-        <input class="form-control rounded-pill" placeholder="Ingrese etiquetas" type="text" v-model="tag" >
-
-        <button class="btn color4 rounded-pill" type="submit"  @click="comprobarTag()">Añadir</button>
+		<div col>
+			<div>
+				<input class="rounded-pill" placeholder="Ingrese etiquetas" type="text" v-model="tag" req>
+			</div>
+			<div>
+				<div class="tag color4 rounded-pill"  @click="comprobarTag()">Añadir</div>
+			</div>
+		</div>
         <div>
-
-        </div>
+		</div>
         <div class = "mt-5"></div>
         <div class="mt-5">
             <div row v-for="(_tag, index) in etiquetas" :key="index" class="tag rounded-pill" @click="removeTag(index)">{{ _tag }}</div>
