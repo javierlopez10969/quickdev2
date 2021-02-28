@@ -53,17 +53,18 @@
 
             </div>
              <!-- Carta Perfil -->
-            <div v-if= "!botones">
-                <div class="card UserCard" style="max-width: 150px;" >
+            <div v-if= "!botones" >
+                <div class="card UserCard" style="max-width: 205px; border: 0px;" >
                     <div class="row no-gutters ">
                         <div class="col-md-4">
                             <img src="https://i.ibb.co/5RxkXzx/blank-profile-picture-973460-640.png" class="card-img" alt="User" style="width:100%">
                        </div>
                         <div class="col-md-8">
                             <div class="card-body mx-0 px-0">
-                              <h6 class="card-title textSmall text-center" >{{user.name}}</h6>
-                             <p class="card-text textSmall text-center">{{user.role}}</p>
-                             <p class="card-text textSmall color6 text-center rounded" @click="logout()" role="button"> <i class="bi bi-power"></i> Cerrar Sesión</p>    
+                             <p class="card-title textSmall text-center padding-fix" >{{user.name}}</p>
+                             <p class="card-text textSmall padding-fix text-center">{{user.role}}</p>
+                             <p class="card-text textSmall text-center padding-fix color8" role="button"><a class="letra-blanca" href="/"> <i class="bi bi-gear-fill"></i> Editar mi perfil</a></p>
+                             <p class="card-text textSmall padding-fix color6 text-center redondeado-abajo-derecha" @click="logout()" role="button"> <i class="bi bi-power"></i> Cerrar Sesión</p>    
                             </div>
                         </div>
 
@@ -208,15 +209,18 @@ estilo de colores (pude ser HEX)   ej #FFFFFF
     .sidenav a {font-size: 18px;}
     }
     .UserCard {
-    max-height: 50px;
+    max-height: 68px;
     
     }
     .textSmall{
-        margin-top: -15px;
+        margin-top: -16px;
         font-size: 11px !important;
     }
-    .card-body{
-        padding: 0px;
+    .padding-fix{
+        padding-top: 1px;
+        padding-right: 10px;
     }
-
+    .redondeado-abajo-derecha{
+        border-bottom-right-radius: 4px;
+    }
  </style> 

@@ -12,7 +12,7 @@
       <router-view v-bind:usuario=usuario></router-view>
     </div>
 
-    <div class = "container bottom">
+    <div class = "container-fluid bottom mx-0 px-0">
       <Footer></Footer>
     </div>
   </div>
@@ -130,9 +130,23 @@ export default {
     color: white !important ;
   }
   .color7:{
-
     background-color: #9F9FED !important;
     color: #736CED !important;
+  }
+    .color8{
+    background-color: rgb(110, 110, 110) !important ;
+     color: white !important ;
+  }
+  .color8:hover{
+    background-color: rgb(153, 153, 153) !important  ;
+    color: white !important ;
+  }
+  .letra-blanca{
+    color: white;
+  }
+  .letra-blanca:hover{
+    color: white;
+     text-decoration: none;
   }
 
 
