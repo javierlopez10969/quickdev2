@@ -3,14 +3,6 @@
         <div class="text-center">
         <button class="btn color2 rounded-circle text-center" v-b-toggle.sidebar-1><i class="bi bi-list"></i></button>
         <b-sidebar id="sidebar-1" title="Bienvenido"  shadow>
-            <!--footer
-            <template #footer="{ hide }">
-                <div class="d-flex bg-dark text-light align-items-center px-3 py-2">
-                    <strong class="mr-auto">Footer</strong>
-                    <b-button size="sm" @click="hide">Close</b-button>
-                </div>
-            </template>
-            -->
             <h3>
                 {{usuario.name}}
             </h3>
@@ -48,16 +40,10 @@
                     <!-- Boton 2 -->
                     <router-link 
                     :to="{name: 'MiProyecto', params: { id: usuario.idProyecto}}" 
-                    class="btn btn-succes color2 border border-1">Ver Proyecto
+                    class="btn btn-succes color2 border border-1">Mi proyecto actual
                     </router-link>
-                    <a class="btn btn-default color2 border border-1"  role="button">Mi proyecto actual</a>
                 </div>
-
-
-
-
-            </div>
-            
+            </div>           
             </div>
         </b-sidebar>
         </div>

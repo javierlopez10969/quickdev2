@@ -2,37 +2,36 @@
     
     <div row class="container-fluid text-center">
         <div col>
+            <div class="container-fluid ventana">
 
+                    PROYECTO 
+                    <h1>{{proyect.titulo}}</h1>
+                    <h2> Cliente : {{proyect.cliente}} 
+                        id Cliente : {{proyect.idCliente}}
+                    </h2>
+                    <h6>
+                    <p>{{proyect.contenido}}
+                    </p> 
+                    </h6>
+                    <h2>
+                    </h2>
+                    <h1>
+                        Postulantes del proyecto : 
+                    </h1>   
+                    <li v-for="postulante in postulantes" :key="postulante._id" >
+                        {{ postulante.nombre}}
+                    </li>
+                    <div row>
+                        <router-link :to="{name: 'editProyect', params: { id: proyect._id }}" class="btn btn-success rounded-pill">Editar
+                        </router-link>
+                        <button @click.prevent="deleteProyect(proyect._id)" class="btn btn-danger rounded-pill">Eliminar </button>
+                    </div>
+
+            </div>
         </div>
-        <div col class="container-fluid ventana ">
-            <!--  -->
-            <form @submit.prevent="handleUpdateForm"> 
-                PROYECTO 
-                <h1>{{proyect.titulo}}</h1>
-                <h2> Cliente : {{proyect.cliente}} 
-                    id Cliente : {{proyect.idCliente}}
-                </h2>
-                <h6>
-                <p>{{proyect.contenido}}
-                </p> 
-                </h6>
-                <h2>
-                </h2>
-                    <div class="form-group text-center">
-                </div>   
 
-               
-                <button class="btn btn-lg color4 rounded-pill"
-                @click="checkearPostulantes();" > Postular</button>
-            </form>
-
-
-        </div>
         <div col>
-                <p> 
-                Postulantes proyect : 
-                </p>
-                {{proyect.postulantes}}
+
         </div>
 
     </div> 
@@ -46,16 +45,25 @@ import axios from "axios";
         data() {
             return {
                 proyect: { },
+                postulantes : []
             }
-        },     
+        },   
+        updated() {
+            if (this.usuario.idProyecto == '' || this.usuario.idProyecto == undefined ) {
+                this.$router.push('/home');
+            }
+        },  
         created() {
+            if (this.usuario.idProyecto == '' || this.usuario.idProyecto == undefined ) {
+                this.$router.push('/home');
+            }
             let apiURL = `http://localhost:3000/api/edit-proyect/${this.$route.params.id}`;
             axios.get(apiURL).then((res) => {
                 this.proyect = res.data;
+            }).catch(error => {
+                console.log(error)
             });
-        },
-        computed(){
-
+            this.postulantes = this.proyect.postulantes;
         },
         methods: {
             handleUpdateForm() {
@@ -86,7 +94,33 @@ import axios from "axios";
                 }
                 this.actualizarPostulantes();
                 return true;
-            }
+            },
+            deleteProyect(id){
+                let apiURL = `http://localhost:3000/api/delete-proyect/${id}`;
+                if (window.confirm("Seguro que quiere borrar su proyecto")) {
+                    this.actualizarIDUsuario();
+                    axios.delete(apiURL).then(() => {
+                        //Quitarle el id a todos los postulantes
+                        this.$router.push('/home');
+                    }).catch(error => {
+                        console.log(error)
+                        alert(error)
+                    });
+                }
+            },
+            actualizarIDUsuario(){
+                //Asignar id del proyecto al usuario
+                let apiURLuser = `http://localhost:3000/api/update-user/`+this.usuario._id;
+                this.usuario.idProyecto = '';
+                axios.post(apiURLuser, this.usuario).then((res) => {
+                    console.log(res)
+                    this.usuario = res;
+                // this.$router.push('/view')
+                }).catch(error => {
+                    console.log(error)
+                });
+            },
+            
         }    
     }
 </script>

@@ -61,6 +61,11 @@ const routes = [
     component: () => import('../components/proyectos/MiProyecto')
   },
   {
+    path: '/editProyect/:id',
+    name: 'editProyect',
+    component: () => import('../components/proyectos/EditarProyecto')
+  },
+  {
     path: '/post',
     name: 'postear',
     component: () => import('../components/proyectos/RegistrarProyecto')

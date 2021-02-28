@@ -1,14 +1,15 @@
 <template>
     <div>
+        <div v-if="Proyects.length === 0">
+            <h1>
+                No existen proyectos actualmente
+            </h1>
+        </div>
         <row v-for="proyect in Proyects" :key="proyect._id">
-            <Posit
-                v-bind:titulo="proyect.titulo"
-                v-bind:cliente="proyect.cliente"
-                v-bind:contenido="proyect.contenido"
-                v-bind:id="proyect._id">
-                v-bind:idCliente="proyect.idCliente">
+            <Posit v-bind:proyecto="proyect">
             </Posit>
         </row>
+
     </div>
 </template>
 <script>

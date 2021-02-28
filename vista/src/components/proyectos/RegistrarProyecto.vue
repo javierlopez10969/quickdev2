@@ -17,6 +17,10 @@
                         <label for="exampleFormControlTextarea1">Describa su proyecto</label>
                             <textarea class="form-control rounded" id="exampleFormControlTextarea1"  placeholder="Descripción" v-model="proyect.contenido" rows="3" required></textarea>
                         </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Requisitos para el proyecto</label>
+                            <textarea class="form-control rounded" id="exampleFormControlTextarea1"  placeholder="Descripción" v-model="proyect.requisito" rows="3" required></textarea>
+                        </div>
                         <!--Componente de tags-->
                         <div class="container-fluid">
                             <Tags 
@@ -62,7 +66,8 @@ export default {
                 contenido :'',
                 requisito : ''
             },
-            Proyects : []
+            Proyects : [],
+            out :1,
         }
     },
     created() {
@@ -73,6 +78,7 @@ export default {
         }
         if (this.usuario.idProyecto != '') {
             this.$router.push('/home');
+            this.out  = 0;
         }
         let apiURLproyect = 'http://localhost:3000/api/proyects';
         axios.get(apiURLproyect).then(res => {
@@ -83,15 +89,19 @@ export default {
         });
 
     },
+    updated() {
+        if (this.usuario.idProyecto != '' && this.out ==1) {
+            this.$router.push('/home');
+            alert('Proyecto creado con exito')
+        }
+    },
     methods: {
         handleSubmitForm() {
             this.proyect.idCliente = this.usuario._id;
             let apiURL = 'http://localhost:3000/api/create-proyect';
             axios.post(apiURL, this.proyect).then(res => {
-                this.proyect = res.data;
-                this.usuario.idProyecto = this.proyect._id; 
-                alert(this.proyect._id);
-                this.actualizarIDUsuario();
+                this.proyect  = res.data;
+                this.usuario.idProyecto = this.proyect._id;
                 this.proyect ={
                     titulo:'',  
                     cliente : '',
@@ -104,18 +114,28 @@ export default {
                     contenido :'',
                     requisito : ''
                 }
+                this.actualizarIDUsuario();
             }).catch(error => {
                 alert(error)
                 console.log(error)
             });
         },
         actualizarIDUsuario(){
+            let idProyecto ;
+            let idUsuario = this.usuario._id;
+            for (let i = 0; i < this.Proyects.length; i++) {
+                idProyecto = this.Proyects[i].idCliente;
+                if(idProyecto == idUsuario ){
+                    this.usuario.idProyecto = this.Proyects[i]._id;
+                    break;
+                }
+            }
             //Asignar id del proyecto al usuario
             let apiURLuser = `http://localhost:3000/api/update-user/`+this.usuario._id;
             console.log('API')
             axios.post(apiURLuser, this.usuario).then((res) => {
-                console.log(res)
-                alert('id cliente  : ' + this.usuario._id + ' id proyecto : ' + this.usuario.idCliente);
+                console.log(res);
+                this.usuario = res.data;
             // this.$router.push('/view')
             }).catch(error => {
                 console.log(error)

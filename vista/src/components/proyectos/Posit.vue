@@ -3,18 +3,18 @@
         <img hre src="https://i.ibb.co/6P44Zc9/Rectangle-12.png" alt="Rectangle-12" width="250" height="250" />
         <div class="centrado text-center color7">
 
-            <div class = "text-center color7">
-                <div>
-                    <h4>{{titulo.slice(0,20)}} ...</h4>
+            <div class = " rowtext-center color7">
+                <div col> 
+                    <h4>{{proyecto.titulo.slice(0,20)}} ...</h4>
                 </div>
                 <div>
-                    <h5>{{contenido.slice(0,30)}}...</h5>
+                    <h5>{{proyecto.contenido.slice(0,30)}}...</h5>
                 </div>
                 <div>
-                    <h5> Cliente :{{cliente}}</h5>
+                    <h5> Cliente :{{proyecto.cliente}}</h5>
                 </div>
                 <div>
-                   ID cliente : {{idCliente}}
+                   ID cliente : {{proyecto.idCliente}}
                 </div>
             </div>
 
@@ -22,7 +22,7 @@
 
         <div class="texto-encima">
             <router-link 
-            :to="{name: 'proyecto', params: { id: id}}" 
+            :to="{name: 'proyecto', params: { id: proyecto._id}}" 
             class="btn btn-succes color6 bottom rounded-pill">Ver Proyecto
             </router-link>
         </div>
@@ -35,32 +35,8 @@
 <script>
 export default {
     props: [
-        'id',
-        'idCliente',
-        'titulo',
-        'cliente',
-        'postulantes',
-        'especialista',
-        'contenido',
-        'requisito'],
-    data() {
-        return {
-        }
-    },
-    computed(){
-
-    },
-    created() {
-    },
-    methods: {
-        
-    },
-    updated() {
-        
-    },
-    mounted() {
-        
-    },
+        'proyecto',
+        ],
 }
 </script>
 
