@@ -8,6 +8,7 @@ let proyectSchema = mongoose.Schema({
     titulo: {type: String,required: true},
     //Cliente solicitante del proyecto : id
     cliente: {type: String},
+    idCliente :{type : String},
     //Postulantes array con todos los id
     postulantes:{type: Array},
     //Etiquetas que uno le puede añadir a su proyecyo
@@ -17,7 +18,6 @@ let proyectSchema = mongoose.Schema({
     //Descripción del proyecto
     contenido: {type: String,required: true},
     requisito:{type: String},
-
     create_date: {type: Date,default: Date.now}
 });
 

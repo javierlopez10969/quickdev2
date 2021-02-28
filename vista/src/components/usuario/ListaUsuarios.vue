@@ -7,10 +7,10 @@
                         <th>Nombre</th>
                         <th>Correo</th>
                         <th>Telefono</th>
-                        <th>Genéro</th>
+                        <th>Nombre Empresa</th>
                         <th>Rol</th>
                         <th>Activo</th>
-                        <th>Contraseña</th>
+                        <th>Especialidad</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -19,10 +19,10 @@
                         <td>{{ user.name }}</td>
                         <td>{{ user.email }}</td>
                         <td>{{ user.phone }}</td>
-                        <td>{{ user.gender }}</td>
+                        <td>{{ user.nameEmpresa }}</td>
                         <td>{{ user.role}}</td>
                         <td>{{ user.activo }}</td>
-                        <td>{{ user.pass}}</td>
+                        <td>{{ user.especialidad}}</td>
                         <td>
                             <router-link :to="{name: 'edit', params: { id: user._id }}" class="btn btn-success">Editar
                             </router-link>

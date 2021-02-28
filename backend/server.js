@@ -10,8 +10,8 @@ const app = express();
 
 //RUTAS
 const userAPI = require('../backend/routes/user.route');
-const pruebaAPI = require('../backend/routes/api.route');
 const proyectAPI = require('../backend/routes/proyect.route');
+//const pruebaAPI = require('../backend/routes/api.route');
 //const permissionAPI = require('../backend/routes/permission.route');
 //const platformAPI = require('../backend/routes/platform.route');
 //const rolAPI = require('../backend/routes/rol.route');

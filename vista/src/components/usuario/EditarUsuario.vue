@@ -47,7 +47,6 @@ export default {
     },
     created() {
         let apiURL = `http://localhost:3000/api/edit-user/${this.$route.params.id}`;
-
         axios.get(apiURL).then((res) => {
             this.user = res.data;
         })

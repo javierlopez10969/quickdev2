@@ -6,7 +6,13 @@
       </p>  
       de correo : {{user.email}}
       <p>
-        id _  {{user._id}}
+        id Usuario :  {{user._id}} {{user.idProyecto}}
+      </p>
+      <p v-if="user.idProyecto != ''">
+        id Proyecto actual : {{user.idProyecto}}
+      </p>
+      <p v-if="user.idProyecto == ''">
+          Usted no tiene un proyecto actual {{user.idProyecto}}
       </p>
     </h1>
     <h1>

@@ -32,7 +32,7 @@
                             <input name="" class="form-control rounded-pill" placeholder="Apellido" type="text" v-model="apellido" required>
                         </div> 
                         <div class="form-group input-group">
-                            <input name="" class="form-control rounded-pill" placeholder="Nombre de la empresa" type="text" v-model="apellido" required>
+                            <input name="" class="form-control rounded-pill" placeholder="Nombre de la empresa" type="text" v-model="user.nameEmpresa" required>
                         </div> 
                         <div class="form-group input-group">
                             <input name="" class="form-control rounded-pill" placeholder="Correo electrónico" type="email" v-model="user.email" required>
@@ -57,6 +57,15 @@
                             </select>
                         </div>
 
+                        <div v-if="user.role=='Especialista'">
+                            <div class="form-group input-group">
+                                <input name="" class="form-control rounded-pill" placeholder="Servicios que ofreces" type="text" v-model="user.especialidad" required>
+                            </div> 
+                        </div>
+
+                        <div v-if="user.role=='Cliente'">
+                            <input name="" class="form-control rounded-pill" placeholder="Rubro de tu empresa" type="text" v-model="user.especialidad" required>
+                        </div>
                         <div class="form-group input-group">
                             <input class="form-control rounded-pill" placeholder="Contraseña" type="password" v-model="user.pass" required name="password" >
                         </div> 
@@ -93,10 +102,11 @@
                     username: '', 
                     name: '',
                     email: '',
-                    gender: '',
                     phone: '',
                     pass: '',
                     role: '',
+                    especialidad: '',
+                    nameEmpresa :''
                     
                 },
                 pass: '',
@@ -120,9 +130,10 @@
                     username:'',  
                     name: '',
                     email: '',
-                    gender: '',
                     pass: '',
                     phone: '',
+                    especialidad: '',
+                    nameEmpresa : ''
                   } 
                  //
                 }).catch(error => {

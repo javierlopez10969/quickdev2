@@ -14,6 +14,9 @@
                 <div>
                     <h5> Cliente :{{cliente}}</h5>
                 </div>
+                <div>
+                   ID cliente : {{idCliente}}
+                </div>
             </div>
 
         </div>
@@ -34,6 +37,7 @@
 export default {
     props: [
         'id',
+        'idCliente',
         'titulo',
         'cliente',
         'postulantes',

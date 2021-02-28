@@ -9,7 +9,9 @@
             <form @submit.prevent="handleUpdateForm"> 
                 PROYECTO 
                 <h1>{{proyect.titulo}}</h1>
-                <h2> Cliente : {{proyect.cliente}} </h2>
+                <h2> Cliente : {{proyect.cliente}} 
+                    id Cliente : {{proyect.idCliente}}
+                </h2>
                 <h6>
                 <p>{{proyect.contenido}}
                 </p> 
@@ -25,7 +27,7 @@
 
                
                 <button class="btn btn-lg color4 rounded-pill"
-                @click="checkearPostulantes();actualizarPostulantes();" > Postular</button>
+                @click="checkearPostulantes();" > Postular</button>
             </form>
 
 
@@ -82,6 +84,7 @@ import axios from "axios";
                         return false;
                     }
                 }
+                this.actualizarPostulantes();
                 return true;
             }
         }    

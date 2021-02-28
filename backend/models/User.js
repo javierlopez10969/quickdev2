@@ -12,12 +12,15 @@ const roles = {
 let userSchema = mongoose.Schema({
     username:{type: String,required: [true, 'El rut es necesario']},
     name:{type: String,required: [true, 'El nombre es necesario'] },
+    nameEmpresa:{type: String},
     email:{type: String,required: [true, 'La contraseña es necesaria'] },
     pass:{type: String, required: [true, 'Pass es necesario'] },
-    gender: String,
+    especialidad: String,
     phone: String,
     role: { type: String, default: 'USER', enum: roles },
     activo: { type: Boolean, default: true },
+    proyectosPostulados: {type: Array},
+    idProyecto: String, 
     date: {type: Date,default: Date.now}
 });
 

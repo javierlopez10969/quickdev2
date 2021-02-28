@@ -30,21 +30,21 @@
                     <!-- Boton 2 -->
                     <a class="btn btn-default color2 border border-1" href="/tablon" role="button">Tablón</a>
                 </div>
-                <div class="row">
+                <div class="row" v-if="usuario.role == 'Cliente'">
                     <!-- Boton 2 -->
                     <a class="btn btn-default color2 border border-1"  href="/post" role="button">Crear proyecto</a>
                 </div>
-                <div class="row">
+                <div class="row" v-if="usuario.role == 'Cliente'">
                     <!-- Boton 2 -->
                     <a class="btn btn-default color2 border border-1"   href="/post" role="button">Mis proyectos publicados</a>
                 </div>
 
-                <div class="row">
+                <div class="row" v-if="usuario.role == 'Especialista'">
                     <!-- Boton 2 -->
                     <a class="btn btn-default color2 border border-1"   href="/post" role="button">Mis proyectos postulados</a>
                 </div>
 
-                                <div class="row">
+                <div class="row" >
                     <!-- Boton 2 -->
                     <a class="btn btn-default color2 border border-1"   href="/post" role="button">Mi proyecto actual</a>
                 </div>

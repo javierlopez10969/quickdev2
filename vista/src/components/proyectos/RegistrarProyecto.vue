@@ -8,6 +8,7 @@
                 <article class="card-body mx-auto" style="max-width: 400px;">
 
                     <h2 class="card-title text-center">Crear proyecto</h2>
+                    {{usuario._id}}
                     <form @submit.prevent="handleSubmitForm">
                         <div class="form-group input-group">
                             <input name="" class="form-control rounded-pill" placeholder="Titulo del proyecto" v-model="proyect.titulo" type="text"  required>
@@ -25,7 +26,7 @@
                         <!--fIN Componente de tags-->
                         
                         <div class="form-group text-center">
-                            <button class="btn btn-lg color4 rounded-pill" type="submit" @click="handleSubmitForm()">Crear proyecto</button>
+                            <button class="btn btn-lg color4 rounded-pill" type="submit" >Crear proyecto</button>
                         </div>                                                                     
                     </form>
 
@@ -55,20 +56,36 @@ export default {
                 cliente : '',
                 postulantes :[],
                 etiquetas: [],
-                id :'',
+                idCliente :'',
                 tags : [],
                 especialista : '',
                 contenido :'',
                 requisito : ''
-            }
+            },
+            Proyects : []
         }
     },
     created() {
-        this.proyect.id = this.usuario._id;
-        this.proyect.cliente = this.usuario.nombre;
+        this.proyect.idCliente = this.usuario._id;
+        this.proyect.cliente = this.usuario.name;
+        if (this.usuario.role == 'Especialista') {
+            this.$router.push('/home');
+        }
+        if (this.usuario.idProyecto != '') {
+            this.$router.push('/home');
+        }
+        let apiURLproyect = 'http://localhost:3000/api/proyects';
+        axios.get(apiURLproyect).then(res => {
+            this.Proyects = res.data;
+        }).catch(error => {
+            console.log(error)
+            alert(error);
+        });
+
     },
     methods: {
         handleSubmitForm() {
+            this.proyect.idCliente = this.usuario._id;
             let apiURL = 'http://localhost:3000/api/create-proyect';
             axios.post(apiURL, this.proyect).then(() => {
                 //this.$router.push('/view')
@@ -79,17 +96,39 @@ export default {
                     postulantes :[],
                     etiquetas: [],
                     id :'',
+                    idCliente :'',
                     tags : [],
                     especialista : '',
                     contenido :'',
                     requisito : ''
                 }
-
+                this.actualizarIDUsuario();
             }).catch(error => {
                 alert(error)
                 console.log(error)
             });
         },
+        actualizarIDUsuario(){
+            let idProyecto ;
+            let idUsuario = this.usuario._id;
+            for (let i = 0; i < this.Proyects.length; i++) {
+                idProyecto = this.Proyects[i].idCliente;
+                if(idProyecto == idUsuario ){
+                    this.usuario.idProyecto = this.Proyects[i]._id;
+                    break;
+                }
+                
+            }
+            //Asignar id del proyecto al usuario
+            let apiURLuser = `http://localhost:3000/api/update-user/`+this.usuario._id;
+            console.log('API')
+            axios.post(apiURLuser, this.usuario).then((res) => {
+                console.log(res)
+            // this.$router.push('/view')
+            }).catch(error => {
+                console.log(error)
+            });
+        }
     },
 }
 </script>

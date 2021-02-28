@@ -52,9 +52,28 @@
 
 
             </div>
+             <!-- Carta Perfil -->
+            <div v-if= "!botones">
+                <div class="card UserCard" style="max-width: 150px;">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="https://i.ibb.co/5RxkXzx/blank-profile-picture-973460-640.png" class="card-img" alt="User" style="width:100%">
+                       </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                              <h6 class="card-title textSmall">{{user.name}}</h6>
+                             <p class="card-text textSmall">{{user.role}}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- 
             <div v-if= "!botones">
                     {{user.name}}
             </div>
+-->
             <ul class="nav navbar-nav navbar-right"  v-if="botones">
                 <!-- Boton Iniciar Sesion -->
                     <a class="btn btn-default color2 rounded-pill"  href="/login" role="button" >Iniciar Sesión</a>
@@ -68,8 +87,11 @@
                 <ul class="nav navbar-nav navbar-right">
                         
                 </ul>
+
                 <div>
+                    <!-- 
                     <a class="btn btn-default color6 rounded-pill center-text"  type="submit" @click="logout()" role="button"> <i class="bi bi-power"></i>Cerrar Sesión</a>
+                -->
                 </div>
             </ul>
 
@@ -183,6 +205,15 @@ estilo de colores (pude ser HEX)   ej #FFFFFF
     @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
+    }
+    .UserCard {
+    max-height: 50px;
+    
+    }
+    .textSmall{
+        margin-top: -15px;
+        margin-left: -10px;
+        font-size: 11px !important;
     }
 
  </style> 

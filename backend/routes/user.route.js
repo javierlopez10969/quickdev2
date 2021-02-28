@@ -25,12 +25,15 @@ userRoute.route('/users').get((req, res) => {
 userRoute.route('/registrar').post((req, res , next) => {
     console.log('Api / registrar')
     const newUser = new userModel({
+      name: req.body.name,
+      nameEmpresa: req.body.nameEmpresa,
       email: req.body.email,
       username: req.body.username ,
-      name: req.body.name,
       pass: bcrypt.hashSync(req.body.pass, 10),
-      gender: req.body.gender,
-      phone: req.body.phone
+      especialidad: req.body.especialidad,
+      phone: req.body.phone,
+      role : req.body.role,
+      idProyecto : '',
     })
     //Obtenemos los datos username y password
     const correo = req.body.email
@@ -40,7 +43,7 @@ userRoute.route('/registrar').post((req, res , next) => {
     //Encriptamos por medio de una función la contraseña 
     //var passEncriptada = encriptar(username, password)
     //Buscamos si el usuario existe
-    userModel.findOne({email:req.body.email},function(err, user){
+    userModel.findOne({correo},function(err, user){
         if (!err) console.log("step2");
         else{
           console.log('error findOne : '  + err.message);
@@ -51,6 +54,7 @@ userRoute.route('/registrar').post((req, res , next) => {
         else{
             exite = true;
             console.log('Usuario ya existe')
+
         }  
     })
 
@@ -63,7 +67,7 @@ userRoute.route('/registrar').post((req, res , next) => {
         }
         return res.status(400).json({
           title: 'Usuario ya existe',
-          error: ''
+          error: 'Usuario ya existe'
         })
       }
     })
@@ -146,7 +150,8 @@ userRoute.route('/update-user/:id').post((req, res, next) => {
       return next(error);
     } else {
       res.json(data)
-      console.log('user successfully updated!')
+      console.log('user successfully updated!');
+      console.log('Name user : ' + req.body.name+' New user id proyecto : ' + req.body.idProyecto  + ' id usuario' + req.body._id  )
     }
   })
 })
@@ -169,13 +174,16 @@ userRoute.get('/faker-user',  (req, res) => {
   console.log("Ruta de fakers");
   for (let i = 0; i < 100 ; i++) {
           userModel.create({
-          name : faker.name.findName(),
-          username : faker.name.findName(),
-          pass : faker.internet.password(),
-          email: faker.internet.email(),
-          gender: faker.name.gender() ,
-          phone: faker.phone.phoneNumber()
-      })
+            name : faker.name.findName(),
+            username : faker.name.findName(),
+            nameEmpresa : faker.company.companyName(),
+            pass : faker.internet.password(),
+            email: faker.internet.email(),
+            role : faker.random.arrayElement(['Cliente','Especialista']),
+            especialidad: faker.name.jobTitle(),
+            phone: faker.phone.phoneNumber(),
+            idProyecto : ''
+          })
   }
   res.send('Creando 100 usuarios faker');
 });
