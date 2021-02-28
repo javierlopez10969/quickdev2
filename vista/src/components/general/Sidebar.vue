@@ -46,7 +46,11 @@
 
                 <div class="row" >
                     <!-- Boton 2 -->
-                    <a class="btn btn-default color2 border border-1"   href="/post" role="button">Mi proyecto actual</a>
+                    <router-link 
+                    :to="{name: 'MiProyecto', params: { id: usuario.idProyecto}}" 
+                    class="btn btn-succes color2 border border-1">Ver Proyecto
+                    </router-link>
+                    <a class="btn btn-default color2 border border-1"  role="button">Mi proyecto actual</a>
                 </div>
 
 

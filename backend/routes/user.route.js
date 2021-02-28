@@ -44,27 +44,29 @@ userRoute.route('/registrar').post((req, res , next) => {
     //var passEncriptada = encriptar(username, password)
     //Buscamos si el usuario existe
     userModel.findOne({correo},function(err, user){
-        if (!err) console.log("step2");
+        if (!err){
+          if(!user) {
+            existe = false
+            console.log('Usuario no existe')
+          }
+          else{
+              exite = true;
+              console.log('Usuario ya existe')
+          }  
+        }
         else{
           console.log('error findOne : '  + err.message);
         } 
-        if(!user) {
-          existe = false
-        }
-        else{
-            exite = true;
-            console.log('Usuario ya existe')
-
-        }  
     })
 
     userModel.create(newUser, (error, data) => {  
       if (error) {
         return next(error)
-      } else {
-        if(existe == false){
-          res.json(data) 
-        }
+      }
+      if(existe == false){
+        console.log('usuario registrado' + data._id)
+        res.json(data) 
+      }else{
         return res.status(400).json({
           title: 'Usuario ya existe',
           error: 'Usuario ya existe'

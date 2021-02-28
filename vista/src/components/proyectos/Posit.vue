@@ -5,7 +5,6 @@
 
             <div class = "text-center color7">
                 <div>
-
                     <h4>{{titulo.slice(0,20)}} ...</h4>
                 </div>
                 <div>

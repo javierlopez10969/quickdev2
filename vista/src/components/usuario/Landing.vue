@@ -6,7 +6,7 @@
       </p>  
       de correo : {{user.email}}
       <p>
-        id Usuario :  {{user._id}} {{user.idProyecto}}
+        id Usuario :  {{user._id}}
       </p>
       <p v-if="user.idProyecto != ''">
         id Proyecto actual : {{user.idProyecto}}

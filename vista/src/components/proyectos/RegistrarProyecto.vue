@@ -87,9 +87,11 @@ export default {
         handleSubmitForm() {
             this.proyect.idCliente = this.usuario._id;
             let apiURL = 'http://localhost:3000/api/create-proyect';
-            axios.post(apiURL, this.proyect).then(() => {
-                //this.$router.push('/view')
-                //Mostar mensaje de proyecto creado
+            axios.post(apiURL, this.proyect).then(res => {
+                this.proyect = res.data;
+                this.usuario.idProyecto = this.proyect._id; 
+                alert(this.proyect._id);
+                this.actualizarIDUsuario();
                 this.proyect ={
                     titulo:'',  
                     cliente : '',
@@ -102,28 +104,18 @@ export default {
                     contenido :'',
                     requisito : ''
                 }
-                this.actualizarIDUsuario();
             }).catch(error => {
                 alert(error)
                 console.log(error)
             });
         },
         actualizarIDUsuario(){
-            let idProyecto ;
-            let idUsuario = this.usuario._id;
-            for (let i = 0; i < this.Proyects.length; i++) {
-                idProyecto = this.Proyects[i].idCliente;
-                if(idProyecto == idUsuario ){
-                    this.usuario.idProyecto = this.Proyects[i]._id;
-                    break;
-                }
-                
-            }
             //Asignar id del proyecto al usuario
             let apiURLuser = `http://localhost:3000/api/update-user/`+this.usuario._id;
             console.log('API')
             axios.post(apiURLuser, this.usuario).then((res) => {
                 console.log(res)
+                alert('id cliente  : ' + this.usuario._id + ' id proyecto : ' + this.usuario.idCliente);
             // this.$router.push('/view')
             }).catch(error => {
                 console.log(error)
