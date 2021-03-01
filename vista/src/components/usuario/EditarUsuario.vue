@@ -24,7 +24,6 @@
                     <select class="form-control rounded-pill " v-model="user.gender" required placeholder="Seleccionar tipo de prec" >
                         <option>Hombre</option>
                         <option>Mujer</option>
-                        <option>Haitiano</option>
                     </select>
                 </div>
 

@@ -26,12 +26,12 @@
       <div >
 
     <!-- Boton 1 -->
-        <a class="btn btn-default color3 rounded-pill"  href="/home" role="button" >home</a>
+        <a class="btn btn-default color3 rounded-pill"  href="/home" role="button" >Home</a>
       </div>
       <div>
 
     <!-- Boton 2 -->
-        <a class="btn btn-default color3 rounded-pill " href="/tablon" role="button">TABLON</a>
+        <a class="btn btn-default color3 rounded-pill " href="/tablon" role="button">Tablon</a>
       </div>
       <div>
 

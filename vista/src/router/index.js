@@ -17,9 +17,19 @@ const routes = [
     component: () => import('../components/general/Home')
   },
   {
+    path: '/about',
+    name: 'about',
+    component: () => import('../components/general/About')
+  },
+  {
     path: '/registrar',
     name: 'registrar',
     component: () => import('../components/usuario/Registrar.vue')
+  },
+  {
+    path: '/preguntas_frecuentes',
+    name: 'preguntas frecuentes',
+    component: () => import('../components/general/PreguntasFrecuentes.vue')
   },
   {
     path: '/login',

@@ -21,12 +21,11 @@
                     Postulantes proyect : 
                     </p>
                     {{proyect.postulantes}}
+                   
                 </h2>
                     <div class="form-group text-center">
                 </div>   
-
-               
-                <button class="btn btn-lg color4 rounded-pill"
+                <button class="btn btn-lg color4 rounded-pill" v-if="usuario.role != 'Cliente'"  
                 @click="checkearPostulantes();" > Postular</button>
             </form>
 
@@ -90,6 +89,7 @@ import axios from "axios";
         }    
     }
 </script>
+
 <style>
     body, html {
     padding: 0;

@@ -26,17 +26,14 @@
 
 
             <!-- Brand/logo -->
-            <a class="navbar-brand" href="/home" >
+            <a class="navbar-brand" href="/" >
                 <img src="https://i.ibb.co/g9T9mMH/quickdev.png"  alt="quickdev"  height="60"/>
             </a>
             <!-- Links -->
             <div class="navbar-collapse collapse">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                    <a class="nav-link" href="/view">Usuarios registrados</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="https://github.com/javierlopez10969/quickdev2.git">Proyecto en GitHub</a>
+                    <a class="nav-link" href="/view/">Usuarios registrados</a>
                     </li>
                     <li class="nav-item">
                     <a class="nav-link" href="/home">Link 3</a>
@@ -63,7 +60,12 @@
                             <div class="card-body mx-0 px-0">
                              <p class="card-title textSmall text-center padding-fix" >{{user.name}}</p>
                              <p class="card-text textSmall padding-fix text-center">{{user.role}}</p>
+                                <!-- 
                              <p class="card-text textSmall text-center padding-fix color8" role="button"><a class="letra-blanca" href="/"> <i class="bi bi-gear-fill"></i> Editar mi perfil</a></p>
+                             -->
+                             <p class="card-text textSmall text-center padding-fix color8" role="button">           
+                                   <router-link class="letra-blanca" :to="{name: 'edit', params: { id: user._id}}" ><i class="bi bi-gear-fill"></i> Editar mi perfil </router-link>
+                            </p>
                              <p class="card-text textSmall padding-fix color6 text-center redondeado-abajo-derecha" @click="logout()" role="button"> <i class="bi bi-power"></i> Cerrar Sesión</p>    
                             </div>
                         </div>
