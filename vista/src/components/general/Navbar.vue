@@ -2,10 +2,7 @@
  <div class="container-fluid">
 
     <!-- barra superior -->
-        <div class="row color1" >
-
-
-                     
+        <div class="row color1" >                    
             
             <nav class="navbar navbar-expand-sm" >
             <div row>
@@ -17,16 +14,16 @@
                 <Sidebar
                 v-bind:usuario=user
                 >
-
                 </Sidebar>
-
-
             </div>    
 
 
 
             <!-- Brand/logo -->
-            <a class="navbar-brand" href="/" >
+            <a class="navbar-brand" href="/" v-if="botones" >
+                <img src="https://i.ibb.co/g9T9mMH/quickdev.png"  alt="quickdev"  height="60"/>
+            </a>
+            <a class="navbar-brand" href="/home" v-else >
                 <img src="https://i.ibb.co/g9T9mMH/quickdev.png"  alt="quickdev"  height="60"/>
             </a>
             <!-- Links -->

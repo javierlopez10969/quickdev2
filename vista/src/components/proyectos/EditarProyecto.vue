@@ -1,8 +1,15 @@
 <template>
     <div row class="container-fluid text-center">
-        <div col></div>
-        <div col class = "container-fluid ventana ">
+        <div>
+            <h4 class="col text-left">
+                <router-link 
+                    :to="{name: 'MiProyecto', params: { id: usuario.idProyecto}}" 
+                    class="btn btn-succes color5 border border-1 rounded-pill">Volver a mi proyecto
+                </router-link>
+            </h4>
 
+        </div>
+        <div class = "container-fluid ventana text-center">
             <a href="/"><img src="https://i.ibb.co/g9T9mMH/quickdev.png" alt="logo" ></a>
             <form class>
                 <article class="card-body mx-auto" style="max-width: 400px;">
@@ -18,6 +25,10 @@
                         <label for="exampleFormControlTextarea1">Describa su proyecto</label>
                             <textarea class="form-control rounded" id="exampleFormControlTextarea1"  placeholder="Descripción" v-model="proyect.contenido" rows="3" required></textarea>
                         </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Requisitos para el proyecto</label>
+                            <textarea class="form-control rounded" id="exampleFormControlTextarea1"  placeholder="Descripción" v-model="proyect.requisito" rows="3" required></textarea>
+                        </div>                        
                         <!--Componente de tags-->
                         <div class="container-fluid">
                             <Tags 
@@ -34,8 +45,8 @@
 
             </form>
         </div>
+        <div>
 
-        <div col>
         </div>
     </div> 
 </template>
@@ -73,17 +84,8 @@ export default {
                 console.log(error)
             });
         },
-        actualizarIDUsuario(){
-            //Asignar id del proyecto al usuario
-            let apiURLuser = `http://localhost:3000/api/update-user/`+this.usuario._id;
-            console.log('API')
-            axios.post(apiURLuser, this.usuario).then((res) => {
-                console.log(res)
-                alert('id cliente  : ' + this.usuario._id + ' id proyecto : ' + this.usuario.idCliente);
-            // this.$router.push('/view')
-            }).catch(error => {
-                console.log(error)
-            });
+        volver(){
+            this.$router.push('/tablon');   
         }
     },
 }

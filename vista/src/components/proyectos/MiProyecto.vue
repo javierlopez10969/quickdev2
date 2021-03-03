@@ -1,6 +1,7 @@
 <template>
     
     <div row class="container-fluid text-center">
+
         <div col>
             <div class="container-fluid ventana">
                     PROYECTO 
@@ -156,6 +157,23 @@ import axios from "axios";
                 }).catch(error => {
                     console.log(error)
                 });
+            },
+            actualizarIDPostulantes(){
+                /*
+                for (let index = 0; index < this.proyect.postulantes.length; index++) {
+                    const element = this.proyect.postulantes[index];
+                    let apiURLuser = `http://localhost:3000/api/update-user/`+elemennt.id;
+                    axios.post(apiURLuser, usuario).then((res) => {
+                        console.log(res)
+                        usuario = res;
+                    // this.$router.push('/view')
+                    }).catch(error => {
+                        console.log(error)
+                    });
+                    
+                }
+                */
+
             },
             esPostulante(id){
                 for (let index = 0; index < this.proyect.postulantes.length; index++) {
