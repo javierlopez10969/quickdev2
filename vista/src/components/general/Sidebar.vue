@@ -26,17 +26,19 @@
                     <!-- Boton 2 -->
                     <a class="btn btn-default color2 border border-1"  href="/post" role="button">Crear proyecto</a>
                 </div>
+                <!-- 
                 <div class="row" v-if="usuario.role == 'Cliente'">
-                    <!-- Boton 2 -->
+                    Boton 2 
                     <a class="btn btn-default color2 border border-1"   href="/post" role="button">Mis proyectos publicados</a>
                 </div>
+                -->
 
                 <div class="row" v-if="usuario.role == 'Especialista'">
                     <!-- Boton 2 -->
-                    <a class="btn btn-default color2 border border-1"   href="/post" role="button">Mis proyectos postulados</a>
+                    <a class="btn btn-default color2 border border-1"  :disabled="misProyectos"  href="/my-proyects" role="button">Mis proyectos postulados</a>
                 </div>
 
-                <div class="row" >
+                <div class="row" v-if="usuario.idProyecto != ''" >
                     <!-- Boton 2 -->
                     <router-link 
                     :to="{name: 'MiProyecto', params: { id: usuario.idProyecto}}" 
@@ -57,7 +59,16 @@ export default {
     ],
     data() {
         return {
-            name : 'Javier'
+            misProyectos : false,
+        }
+    },
+    created() {
+        if(this.usuario.role=="Especialista"){
+            if (this.usuario.proyectosPostulados  == []) {
+                this.misProyectos = false;
+            }else{
+                this.misProyectos  =true ;
+            }
         }
     },
 }

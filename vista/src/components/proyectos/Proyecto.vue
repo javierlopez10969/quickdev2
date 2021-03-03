@@ -1,12 +1,13 @@
 <template>
     
-    <div row class="container-fluid text-center">
+    <div row class="container-fluid ">
         <div col>
-
+            <button class="btn btn-lg color5 rounded-pill"   
+            @click="checkearPostulantes();" > Volver a tablón</button>
         </div>
-        <div col class="container-fluid ventana ">
-            <!--  -->
-            <form @submit.prevent="handleUpdateForm"> 
+        <div col class="container-fluid ventana text-center">
+            <!-- @submit.prevent="handleUpdateForm()" -->
+            <form > 
                 PROYECTO 
                 <h1>{{proyect.titulo}}</h1>
                 <h2> Cliente : {{proyect.cliente}} 
@@ -25,8 +26,10 @@
                 </h2>
                     <div class="form-group text-center">
                 </div>   
-                <button class="btn btn-lg color4 rounded-pill" v-if="usuario.role != 'Cliente'"  
-                @click="checkearPostulantes();" > Postular</button>
+                <div v-if="usuario.role != 'Cliente'" >
+                    <button class="btn btn-lg color4 rounded-pill" 
+                    @click="checkearPostulantes();" > Postular</button>
+                </div>
             </form>
 
 
@@ -50,18 +53,25 @@ import axios from "axios";
             let apiURL = `http://localhost:3000/api/edit-proyect/${this.$route.params.id}`;
             axios.get(apiURL).then((res) => {
                 this.proyect = res.data;
-            });
-            this.checkearPostulantes();
+            });     
         },
         computed(){
 
         },
         methods: {
-            handleUpdateForm() {
+            handleUpdateForm() { 
                 let apiURL = `http://localhost:3000/api/update-proyect/${this.$route.params.id}`;
                 axios.post(apiURL, this.proyect).then((res) => {
-                    console.log(res)
-                // this.$router.push('/view')
+                    console.log(res);
+                    this.proyect = res.data;
+                    if (this.usuario.proyectosPostulados == undefined || 
+                    this.usuario.proyectosPostulados == null ||
+                    this.usuario.proyectosPostulados == []) {
+                        this.usuario.proyectosPostulados = [];
+                    }
+                    this.usuario.proyectosPostulados.push(this.proyect._id);
+                    //alert(this.usuario.proyectosPostulados);
+                    this.actualizarIDPostulante();
                 }).catch(error => {
                     console.log(error)
                 });
@@ -71,20 +81,34 @@ import axios from "axios";
                 this.proyect.postulantes.push({
                     nombre: this.usuario.name, 
                     id: this.usuario._id 
-            });
+                });  
+                this.handleUpdateForm();
+            },
+
+            actualizarIDPostulante() {
+                let apiURL = `http://localhost:3000/api/update-user/`+ this.usuario._id;
+                axios.post(apiURL, this.usuario).then((res) => {
+                    console.log(res)
+                }).catch(error => {
+                    console.log(error)
+                    alert(error);
+                });
             },
             checkearPostulantes(){
                 let arreglo = this.proyect.postulantes;
                 let i;
                 for (i = 0; i < arreglo.length; i++) {
                     if (arreglo[0].id === this.usuario._id) {
-                        alert('usted ya postulado a este proyecto')
+                        alert('Usted ya postulado a este proyecto')
                         this.$router.push('/tablon');
                         return false;
                     }
                 }
                 this.actualizarPostulantes();
                 return true;
+            },
+            volver(){
+                this.$router.push('/tablon');   
             }
         }    
     }

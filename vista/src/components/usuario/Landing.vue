@@ -14,6 +14,19 @@
       <p v-if="user.idProyecto == ''">
           Usted no tiene un proyecto actual {{user.idProyecto}}
       </p>
+      <p v-if="user.proyectosPostulados == [] && user.role == 'Especialista' "  >
+          Usted no ha postulado a ningun proyecto
+      </p>
+      <div v-else-if = "user.role == 'Especialista'">
+          Proyectos postulados
+            <row v-for="proyect in user.proyectosPostulados" :key="proyect._id">
+              <br>{{proyect}}
+              
+            </row>
+      </div>
+      <p>
+
+      </p>
     </h1>
     <h1>
 

@@ -33,6 +33,7 @@ userRoute.route('/registrar').post((req, res , next) => {
       especialidad: req.body.especialidad,
       phone: req.body.phone,
       role : req.body.role,
+      proyectosPostulados: [],
       idProyecto : '',
     })
     //Obtenemos los datos username y password
