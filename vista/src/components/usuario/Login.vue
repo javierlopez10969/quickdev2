@@ -60,7 +60,7 @@
     },
     methods: {
         login() {
-        axios.post('http://localhost:3000/api/login', this.user)
+            axios.post('http://localhost:3000/api/login', this.user)
             .then(res => {
             //if successfull
             if (res.status === 200) {
@@ -68,7 +68,7 @@
                 this.$router.push({ path: '/home' });
             }
             }, err => {
-                alert('fail');
+                alert(err.response.data.error);
                 console.log(err.response);
                 this.error = err.response.data.error
             })

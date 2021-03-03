@@ -53,7 +53,6 @@ export default {
     methods: {
         handleUpdateForm() {
             let apiURL = `http://localhost:3000/api/update-user/${this.$route.params.id}`;
-
             axios.post(apiURL, this.user).then((res) => {
                 console.log(res)
                // this.$router.push('/view')

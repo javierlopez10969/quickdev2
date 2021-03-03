@@ -45,7 +45,7 @@
                                 <option selected="">+569</option>
                                 <option value="1">+562</option>
                             </select>
-                            <input name="" class="form-control rounded-pill" placeholder="Número teléfono" type="text" v-model="user.phone" required>
+                            <input name="" class="form-control rounded-pill" placeholder="Número teléfono" type="number" v-model="user.phone" required>
                         </div> 
 
                         <div class="form-group input-group rounded-pill">
@@ -124,8 +124,8 @@
                 this.pass = '';
                 this.limpiarMensaje();
                 this.user.name = this.user.name + ' ' + this.apellido; 
+                alert('Usuario creado con exito, correo de usuario  : ' + this.user.email)
                 axios.post(apiURL, this.user).then(() => {
-                  //this.$router.push('/view')
                   this.user = {
                     username:'',  
                     name: '',
@@ -135,7 +135,7 @@
                     especialidad: '',
                     nameEmpresa : ''
                   } 
-                 //
+                this.$router.push('/login')
                 }).catch(error => {
                     alert(error)
                     console.log(error)

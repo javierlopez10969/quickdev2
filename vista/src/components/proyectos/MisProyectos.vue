@@ -1,8 +1,11 @@
 <template>
     <div>
-        <div v-if="Proyectos.length === 0">
-            <h1>
+        <div >
+            <h1 v-if="Proyects== 0">
                 No existen proyectos actualmente
+            </h1>
+            <h1 v-else>
+                Los proyectos a los que ha postulado :
             </h1>
         </div>
         <div>

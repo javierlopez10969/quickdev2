@@ -3,7 +3,7 @@
     <div row class="container-fluid ">
         <div col>
             <button class="btn btn-lg color5 rounded-pill"   
-            @click="checkearPostulantes();" > Volver a tablón</button>
+            @click="volver()" > Volver a tablón</button>
         </div>
         <div col class="container-fluid ventana text-center">
             <!-- @submit.prevent="handleUpdateForm()" -->

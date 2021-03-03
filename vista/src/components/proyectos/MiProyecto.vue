@@ -3,32 +3,71 @@
     <div row class="container-fluid text-center">
         <div col>
             <div class="container-fluid ventana">
-
                     PROYECTO 
                     <h1>{{proyect.titulo}}</h1>
-                    <h2> Cliente : {{proyect.cliente}} 
-                        id Cliente : {{proyect.idCliente}}
+                    <h2> <br> Cliente : {{proyect.cliente}} 
                     </h2>
-                    <h6>
-                    <p>{{proyect.contenido}}
-                    </p> 
-                    </h6>
-                    <h2>
-                    </h2>
-                    <h1>
-                        Postulantes del proyecto : 
-                    </h1>   
-                    <li v-for="postulante in postulantes" :key="postulante._id" >
-                        {{ postulante.nombre}}
-                    </li>
+                    <h3>
+                        <p>Contenido  :</p>
+                        {{proyect.contenido}}
+                    </h3>
+                    <h3>
+                        <p>Requisitos   :</p>
+                        {{proyect.requisito}}
+                    </h3>
+
                     <div row>
                         <router-link :to="{name: 'editProyect', params: { id: proyect._id }}" class="btn btn-success rounded-pill">Editar
                         </router-link>
                         <button @click.prevent="deleteProyect(proyect._id)" class="btn btn-danger rounded-pill">Eliminar </button>
                     </div>
-
             </div>
         </div>
+        <!-- Mostrar todos los postulantes-->
+        <div class="row" v-if="proyect.postulantes!= undefined">
+        <h3 >
+            <br> <p>Postulantes al proyecto  : </p> 
+        </h3>
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Telefono</th>
+                        <th>Nombre Empresa</th>
+                        <th>Rol</th>
+                        <th>Activo</th>
+                        <th>Especialidad</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="user in Users" :key="user._id">
+                        <template v-if=" esPostulante(user._id)">
+                            <td>{{ user.name }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.phone }}</td>
+                            <td>{{ user.nameEmpresa }}</td>
+                            <td>{{ user.role}}</td>
+                            <td>{{ user.activo }}</td>
+                            <td>{{ user.especialidad}}</td>
+                            <td>
+                                <router-link :to="{name: 'edit', params: { id: user._id }}" class="btn btn-success rounded-pill"> Aceptar
+                                </router-link>
+                                <button @click.prevent="deleteUser(user._id)" class="btn btn-danger rounded-pill "> Rechazar</button>
+                            </td>
+                        </template>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        </div>
+        <h3 v-else>
+            No hay postulantes actualmente
+        </h3>
 
         <div col>
 
@@ -45,7 +84,8 @@ import axios from "axios";
         data() {
             return {
                 proyect: { },
-                postulantes : []
+                Users : [],
+
             }
         },   
         updated() {
@@ -63,7 +103,11 @@ import axios from "axios";
             }).catch(error => {
                 console.log(error)
             });
-            this.postulantes = this.proyect.postulantes;
+            axios.get('http://localhost:3000/api/users').then(res => {
+                this.Users = res.data;
+            }).catch(error => {
+                console.log(error)
+            });
         },
         methods: {
             handleUpdateForm() {
@@ -74,13 +118,6 @@ import axios from "axios";
                 }).catch(error => {
                     console.log(error)
                 });
-            },
-            actualizarPostulantes(){
-                //this.postulantes.push('Hola')
-                this.proyect.postulantes.push({
-                    nombre: this.usuario.name, 
-                    id: this.usuario._id 
-            });
             },
             checkearPostulantes(){
                 let arreglo = this.proyect.postulantes;
@@ -120,6 +157,15 @@ import axios from "axios";
                     console.log(error)
                 });
             },
+            esPostulante(id){
+                for (let index = 0; index < this.proyect.postulantes.length; index++) {
+                    if (id == this.proyect.postulantes[index].id) {
+                        return true;
+                    }
+                }
+                return false;
+
+            }
             
         }    
     }

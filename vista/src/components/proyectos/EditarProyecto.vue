@@ -10,7 +10,7 @@
                     <h2 class="card-title text-center">Editar proyecto</h2>
                     {{usuario._id}}
                     {{usuario.name}}
-                    <form >
+                    <form @submit.prevent="handleUpdateForm">
                         <div class="form-group input-group">
                             <input name="" class="form-control rounded-pill" placeholder="Titulo del proyecto" v-model="proyect.titulo" type="text"  required>
                         </div> 
@@ -21,9 +21,8 @@
                         <!--Componente de tags-->
                         <div class="container-fluid">
                             <Tags 
-                            v-bind:etiquetas.sync="proyect.etiquetas">
+                                v-bind:etiquetas.sync="proyect.etiquetas">
                             </Tags>  
-                            {{}}
                         </div>  
                         <!--fIN Componente de tags-->                        
                         <div class="form-group text-center">
@@ -57,37 +56,20 @@ export default {
         }
     },     
     created() {
+        if (this.usuario.idProyecto == '') {
+            this.$router.push('/home');
+        }
         let apiURL = `http://localhost:3000/api/edit-proyect/${this.$route.params.id}`;
         axios.get(apiURL).then((res) => {
             this.proyect = res.data;
         });
-        if (this.usuario.idProyecto == '') {
-            this.$router.push('/home');
-        }
     },
     methods: {
-        handleSubmitForm() {
-            this.proyect.idCliente = this.usuario._id;
-            let apiURL = 'http://localhost:3000/api/create-proyect';
-            axios.post(apiURL, this.proyect).then(res => {
-                this.proyect = res.data;
-                this.usuario.idProyecto = this.proyect._id; 
-                alert(this.proyect._id);
-                this.actualizarIDUsuario();
-                this.proyect ={
-                    titulo:'',  
-                    cliente : '',
-                    postulantes :[],
-                    etiquetas: [],
-                    id :'',
-                    idCliente :'',
-                    tags : [],
-                    especialista : '',
-                    contenido :'',
-                    requisito : ''
-                }
+        handleUpdateForm() {
+            let apiURL = `http://localhost:3000/api/update-proyect/${this.$route.params.id}`;
+            axios.post(apiURL, this.proyect).then((res) => {
+                console.log(res)
             }).catch(error => {
-                alert(error)
                 console.log(error)
             });
         },
