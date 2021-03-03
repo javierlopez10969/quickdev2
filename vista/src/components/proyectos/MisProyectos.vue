@@ -1,13 +1,21 @@
 <template>
     <div>
-        <div v-if="Proyects.length === 0">
+        <div v-if="Proyectos.length === 0">
             <h1>
                 No existen proyectos actualmente
-                
             </h1>
         </div>
+        <div>
+          Proyectos postulados
+            <row v-for="proyect in usuario.proyectosPostulados" :key="proyect._id">
+              <br>{{proyect}}
+            </row>
+            <br> Proyectos: 
+            {{Proyectos}}
+      </div>
         <row v-for="proyect in Proyects" :key="proyect._id">
             <Posit 
+            v-if="isInside(proyect._id)"
             v-bind:proyecto="proyect">
             </Posit>
         </row>
@@ -25,12 +33,26 @@
             return{
                 usuario: {},
                 Proyects: [],
+                Proyectos: [],
                 page:1,
                 perPage:10,
                 pages: []
             }
         },
         created() {
+
+        },
+        methods: {
+            isInside(id){
+                for (let index = 0; index < this.usuario.proyectosPostulados.length; index++) {
+                    if (id==this.usuario.proyectosPostulados[index]) {
+                        return true
+                    }
+                }
+                return false;
+            }
+        },
+        mounted() {
             let apiURL = 'http://localhost:3000/api/proyects';
             axios.get(apiURL).then(res => {
                 this.Proyects = res.data;
@@ -42,29 +64,6 @@
             .then(res => {
                 this.usuario = res.data.user;
             });
-        },
-        methods: {
-            filtrar(){
-                let k = 0;        
-                let index = 0;    
-                while ( index < this.Proyects.length()) {
-                    //Eliminar el elemento index
-                    if(k== this.usuario.proyectosPostulados.length()){
-                        k = 0;
-                        this.Proyects.splice(index, 1);
-                    }
-                    else if (this.usuario.proyectosPostulados[k] == this.Proyects[index]._id) {
-                        index++;
-                        k = 0;
-                    }
-                    else{
-                        k ++;
-                    }
-                }
-            }
-        },
-        mounted() {
-            this.filtrar();
         },
 
 
