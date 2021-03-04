@@ -4,11 +4,21 @@
         <div class="centrado text-center color7">
 
             <div class = " rowtext-center color7">
-                <div col> 
+                <template v-if = "estado!=undefined">
+                    Estado : {{estado}} 
+                </template>
+                <div v-if="proyecto.titulo.length >= 20"> 
                     <h4>{{proyecto.titulo.slice(0,20)}} ...</h4>
                 </div>
-                <div>
+                <div col v-else> 
+                    <h4>{{proyecto.titulo}}</h4>
+                </div>
+                 
+                <div v-if="proyecto.titulo.length >= 30">
                     <h5>{{proyecto.contenido.slice(0,30)}}...</h5>
+                </div>
+                <div>
+                    <h5>{{proyecto.contenido}}</h5>
                 </div>
                 <div>
                     <h5> Cliente :{{proyecto.cliente}}</h5>
@@ -16,15 +26,17 @@
                 <div>
                    ID cliente : {{proyecto.idCliente}}
                 </div>
+                <router-link 
+                    :to="{name: 'proyecto', params: { id: proyecto._id}}" 
+                    class="btn btn-succes color6 bottom rounded-pill">Ver Proyecto
+                </router-link>
             </div>
 
         </div>
 
         <div class="texto-encima">
-            <router-link 
-            :to="{name: 'proyecto', params: { id: proyecto._id}}" 
-            class="btn btn-succes color6 bottom rounded-pill">Ver Proyecto
-            </router-link>
+
+
         </div>
     </div>
     
@@ -36,6 +48,7 @@
 export default {
     props: [
         'proyecto',
+        'estado'
         ],
 }
 </script>

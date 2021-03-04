@@ -9,15 +9,18 @@
             </h1>
         </div>
         <div>
+           <!-- 
           Proyectos postulados
             <row v-for="proyect in usuario.proyectosPostulados" :key="proyect._id">
               <br>ID  : {{proyect.id}} Estado : {{proyect.estado}}
             </row>
+            -->
       </div>
         <row v-for="proyect in Proyects" :key="proyect._id">
             <Posit 
             v-if="isInside(proyect._id)"
-            v-bind:proyecto="proyect">
+            v-bind:proyecto="proyect"
+            v-bind:estado="estadoActual(usuario.proyectosPostulados,proyect._id)">
             </Posit>
         </row>
 
@@ -51,6 +54,10 @@
                     }
                 }
                 return false;
+            },
+            //Metodo que devuelve el estado actual de los postulados
+            estadoActual(arreglo,proyectID){
+                return arreglo.find(user => user.id === proyectID).estado;
             }
         },
         mounted() {

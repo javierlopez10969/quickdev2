@@ -1,11 +1,13 @@
 <template>
   <div>
-    <!-- NavBar component real -->
+    <!-- NavBar component real
+      {{ currentRouteName }} Tamano : {{tamanoRoute}}
+  {{usuario.name}} {{usuario._id}}
+   -->
     <Navbar v-bind:botones= show v-bind:user=usuario>  </Navbar>
     <div class="container mt-5">
       
-  {{ currentRouteName }} Tamano : {{tamanoRoute}}
-  {{usuario.name}} {{usuario._id}}
+
     </div>
     <div v-if="tamanoRoute===0" class="container mt-5">
       <!-- v-on:update:usuario="usuario = $event" -->

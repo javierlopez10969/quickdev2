@@ -11,7 +11,7 @@
       <p v-if="user.idProyecto != ''">
         id Proyecto actual : {{user.idProyecto}}
       </p>
-      <p v-if="user.idProyecto == ''">
+      <p v-if="user.idProyecto == '' && user.role=='Cliente'">
           Usted no tiene un proyecto actual {{user.idProyecto}}
       </p>
       <p v-if="user.proyectosPostulados == [] && user.role == 'Especialista' "  >

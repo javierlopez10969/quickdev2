@@ -16,7 +16,16 @@
                         <p>Requisitos   :</p>
                         {{proyect.requisito}}
                     </h3>
-                    {{proyect.postulantes}}
+                    <h3 v-if= "proyect.tags.length==0">
+                        <p> Actualmente no hay categorías </p>
+                    </h3>
+                    <h3 v-else>
+                        <p> Categorías : </p>
+                        <li v-for="tag in proyect.tags" :key="tag">
+                            {{tags}}
+                        </li>
+                        
+                    </h3>
 
                     <div row>
                         <router-link :to="{name: 'editProyect', params: { id: proyect._id }}" class="btn btn-success rounded-pill">Editar
@@ -38,11 +47,10 @@
                             <th>Correo</th>
                             <th>Telefono</th>
                             <th>Nombre Empresa</th>
-                            <th>Rol</th>
                             <th>Activo</th>
                             <th>Especialidad</th>
                             <th> Estado </th>
-                            <th>Acciones</th>
+                            <th>Cambiar estado Postulante</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,13 +60,13 @@
                                 <td>{{ user.email }}</td>
                                 <td>{{ user.phone }}</td>
                                 <td>{{ user.nameEmpresa }}</td>
-                                <td>{{ user.role}}</td>
                                 <td>{{ user.activo }}</td>
                                 <td>{{ user.especialidad}}</td>
                                 <td> {{estadoActual (user.proyectosPostulados)}} </td>
                                 <td>
                                     <button @click="actualizarPostulante(proyect._id,user._id,'Aceptado')" class="btn btn-success rounded-pill"> Aceptar</button>
                                     <button @click="actualizarPostulante(proyect._id,user._id,'Rechazado')" class="btn btn-danger rounded-pill "> Rechazar</button>
+                                    <button @click="actualizarPostulante(proyect._id,user._id,'En espera')" class="btn btn-secondary rounded-pill "> En espera</button>
                                 </td>
                             </template>
 
@@ -178,8 +186,10 @@ import axios from "axios";
                 let dialogo = '';
                 if(state=='Aceptado'){
                     dialogo = '¿Seguro que quiere aceptar a ' + nameUser + ' ?';
+                }else if(state=='Rechazado'){
+                    dialogo = '¿Seguro que quiere rechazar a ' + nameUser + ' ?';
                 }else{
-                    dialogo = '¿Seguro que quiere rechazar a' + nameUser + ' ?';
+                    dialogo = '¿Dejar en espera a ' + nameUser + '?';
                 }
                 if (window.confirm(dialogo)) {
                     //Buscamos el indice del proyecto actual que se esta borrando

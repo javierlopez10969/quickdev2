@@ -7,7 +7,6 @@ let proyectSchema = mongoose.Schema({
     //Titulo del proyecto
     titulo: {type: String,required: true},
     //Cliente solicitante del proyecto : id
-    cliente: {type: String},
     idCliente :{type : String},
     //Postulantes array con todos los id
     postulantes:{type: Array},
