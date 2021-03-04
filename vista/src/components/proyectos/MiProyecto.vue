@@ -16,6 +16,7 @@
                         <p>Requisitos   :</p>
                         {{proyect.requisito}}
                     </h3>
+                    {{proyect.postulantes}}
 
                     <div row>
                         <router-link :to="{name: 'editProyect', params: { id: proyect._id }}" class="btn btn-success rounded-pill">Editar
@@ -25,49 +26,49 @@
             </div>
         </div>
         <!-- Mostrar todos los postulantes-->
-        <div class="row" v-if="proyect.postulantes!= undefined">
+        <div class="row" v-if="proyect.postulantes!= undefined && proyect.postulantes.length > 0">
         <h3 >
             <br> <p>Postulantes al proyecto  : </p> 
         </h3>
-        <div class="col-md-12">
-            <table class="table table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Correo</th>
-                        <th>Telefono</th>
-                        <th>Nombre Empresa</th>
-                        <th>Rol</th>
-                        <th>Activo</th>
-                        <th>Especialidad</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="user in Users" :key="user._id">
-                        <template v-if=" esPostulante(user._id)">
-                            <td>{{ user.name }}</td>
-                            <td>{{ user.email }}</td>
-                            <td>{{ user.phone }}</td>
-                            <td>{{ user.nameEmpresa }}</td>
-                            <td>{{ user.role}}</td>
-                            <td>{{ user.activo }}</td>
-                            <td>{{ user.especialidad}}</td>
-                            <td>
-                                <router-link :to="{name: 'edit', params: { id: user._id }}" class="btn btn-success rounded-pill"> Aceptar
-                                </router-link>
-                                <button @click.prevent="deleteUser(user._id)" class="btn btn-danger rounded-pill "> Rechazar</button>
-                            </td>
-                        </template>
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Telefono</th>
+                            <th>Nombre Empresa</th>
+                            <th>Rol</th>
+                            <th>Activo</th>
+                            <th>Especialidad</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="user in Users" :key="user._id">
+                            <template v-if=" esPostulante(user._id)">
+                                <td>{{ user.name }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.phone }}</td>
+                                <td>{{ user.nameEmpresa }}</td>
+                                <td>{{ user.role}}</td>
+                                <td>{{ user.activo }}</td>
+                                <td>{{ user.especialidad}}</td>
+                                <td>
+                                    <router-link :to="{name: 'edit', params: { id: user._id }}" class="btn btn-success rounded-pill"> Aceptar
+                                    </router-link>
+                                    <button @click.prevent="deleteUser(user._id)" class="btn btn-danger rounded-pill "> Rechazar</button>
+                                </td>
+                            </template>
 
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
         </div>
         <h3 v-else>
-            No hay postulantes actualmente
+            <br> No hay postulantes actualmente
         </h3>
 
         <div col>
@@ -86,7 +87,6 @@ import axios from "axios";
             return {
                 proyect: { },
                 Users : [],
-
             }
         },   
         updated() {
@@ -136,7 +136,9 @@ import axios from "axios";
             deleteProyect(id){
                 let apiURL = `http://localhost:3000/api/delete-proyect/${id}`;
                 if (window.confirm("Seguro que quiere borrar su proyecto")) {
+                    //this.actualizarIDPostulantes();
                     this.actualizarIDUsuario();
+                    let idProyecto = this.proyect._id;
                     axios.delete(apiURL).then(() => {
                         //Quitarle el id a todos los postulantes
                         this.$router.push('/home');
@@ -144,6 +146,7 @@ import axios from "axios";
                         console.log(error)
                         alert(error)
                     });
+                    this.actualizarIDPostulantes(idProyecto);
                 }
             },
             actualizarIDUsuario(){
@@ -158,31 +161,37 @@ import axios from "axios";
                     console.log(error)
                 });
             },
-            actualizarIDPostulantes(){
-                /*
+            actualizarIDPostulantes(idProyecto){
                 for (let index = 0; index < this.proyect.postulantes.length; index++) {
-                    const element = this.proyect.postulantes[index];
-                    let apiURLuser = `http://localhost:3000/api/update-user/`+elemennt.id;
-                    axios.post(apiURLuser, usuario).then((res) => {
+                    const user =  this.Users.find(user => user._id === this.proyect.postulantes[index]);
+                    //Buscamos el indice del proyecto actual que se esta borrando
+                    let pos = user.proyectosPostulados.indexOf(idProyecto);
+                    //Procedemos a borrarlo de los proyectos postulados del usuario
+                    user.proyectosPostulados.splice(pos,1);
+                    //Una vez  borrado el proyecto, procedemos a actualizar al usario en la base de datos                  
+                    let apiURLuser = 'http://localhost:3000/api/update-user/' + this.proyect.postulantes[index] ;
+                    axios.post(apiURLuser, user).then((res) => {
                         console.log(res)
-                        usuario = res;
                     // this.$router.push('/view')
                     }).catch(error => {
                         console.log(error)
+                        alert(error);
                     });
-                    
                 }
-                */
 
             },
             esPostulante(id){
                 for (let index = 0; index < this.proyect.postulantes.length; index++) {
-                    if (id == this.proyect.postulantes[index].id) {
+                    if (id == this.proyect.postulantes[index]) {
                         return true;
                     }
                 }
                 return false;
-
+            },
+            updated(){
+                if (this.usuario.idProyecto == '' || this.usuario.idProyecto == undefined ) {
+                    this.$router.push('/home');
+                }
             }
             
         }    

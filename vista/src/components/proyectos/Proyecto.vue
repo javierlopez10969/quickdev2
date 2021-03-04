@@ -78,10 +78,7 @@ import axios from "axios";
             },
             actualizarPostulantes(){
                 //this.postulantes.push('Hola')
-                this.proyect.postulantes.push({
-                    nombre: this.usuario.name, 
-                    id: this.usuario._id 
-                });  
+                this.proyect.postulantes.push(this.usuario._id);  
                 this.handleUpdateForm();
             },
 
@@ -98,7 +95,7 @@ import axios from "axios";
                 let arreglo = this.proyect.postulantes;
                 let i;
                 for (i = 0; i < arreglo.length; i++) {
-                    if (arreglo[0].id === this.usuario._id) {
+                    if (arreglo[i] === this.usuario._id) {
                         alert('Usted ya postulado a este proyecto')
                         this.$router.push('/tablon');
                         return false;
