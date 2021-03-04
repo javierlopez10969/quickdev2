@@ -41,12 +41,13 @@
                             <th>Rol</th>
                             <th>Activo</th>
                             <th>Especialidad</th>
+                            <th> Estado </th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="user in Users" :key="user._id">
-                            <template v-if=" esPostulante(user._id)">
+                            <template v-if=" proyect.postulantes.includes(user._id)">
                                 <td>{{ user.name }}</td>
                                 <td>{{ user.email }}</td>
                                 <td>{{ user.phone }}</td>
@@ -54,10 +55,10 @@
                                 <td>{{ user.role}}</td>
                                 <td>{{ user.activo }}</td>
                                 <td>{{ user.especialidad}}</td>
+                                <td> {{estadoActual (user.proyectosPostulados)}} </td>
                                 <td>
-                                    <router-link :to="{name: 'edit', params: { id: user._id }}" class="btn btn-success rounded-pill"> Aceptar
-                                    </router-link>
-                                    <button @click.prevent="deleteUser(user._id)" class="btn btn-danger rounded-pill "> Rechazar</button>
+                                    <button @click="actualizarPostulante(proyect._id,user._id,'Aceptado')" class="btn btn-success rounded-pill"> Aceptar</button>
+                                    <button @click="actualizarPostulante(proyect._id,user._id,'Rechazado')" class="btn btn-danger rounded-pill "> Rechazar</button>
                                 </td>
                             </template>
 
@@ -111,15 +112,6 @@ import axios from "axios";
             });
         },
         methods: {
-            handleUpdateForm() {
-                let apiURL = `http://localhost:3000/api/update-proyect/${this.$route.params.id}`;
-                axios.post(apiURL, this.proyect).then((res) => {
-                    console.log(res)
-                // this.$router.push('/view')
-                }).catch(error => {
-                    console.log(error)
-                });
-            },
             checkearPostulantes(){
                 let arreglo = this.proyect.postulantes;
                 let i;
@@ -165,7 +157,7 @@ import axios from "axios";
                 for (let index = 0; index < this.proyect.postulantes.length; index++) {
                     const user =  this.Users.find(user => user._id === this.proyect.postulantes[index]);
                     //Buscamos el indice del proyecto actual que se esta borrando
-                    let pos = user.proyectosPostulados.indexOf(idProyecto);
+                    let pos = user.proyectosPostulados.indexOf(proyect => proyect.id === idProyecto);
                     //Procedemos a borrarlo de los proyectos postulados del usuario
                     user.proyectosPostulados.splice(pos,1);
                     //Una vez  borrado el proyecto, procedemos a actualizar al usario en la base de datos                  
@@ -178,22 +170,43 @@ import axios from "axios";
                         alert(error);
                     });
                 }
+            },
+            //Actualizar id del postulante
+            actualizarPostulante(idProyecto , idUser,state){
+                let user =  this.Users.find(user => user._id === idUser);
+                let nameUser = user.name;
+                let dialogo = '';
+                if(state=='Aceptado'){
+                    dialogo = '¿Seguro que quiere aceptar a ' + nameUser + ' ?';
+                }else{
+                    dialogo = '¿Seguro que quiere rechazar a' + nameUser + ' ?';
+                }
+                if (window.confirm(dialogo)) {
+                    //Buscamos el indice del proyecto actual que se esta borrando
+                    let pos = user.proyectosPostulados.indexOf(proyect => proyect.id === idProyecto);
+                    //Procedemos a borrarlo de los proyectos postulados del usuario
+                    const newState =  {
+                        id : idProyecto,
+                        estado : state
+                    }
+                    user.proyectosPostulados.splice(pos,1,newState);
+                    //Una vez  borrado el proyecto, procedemos a actualizar al usario en la base de datos                  
+                    let apiURLuser = 'http://localhost:3000/api/update-user/' + idUser ;
+                    axios.post(apiURLuser, user).then((res) => {
+                        console.log(res)
+                    // this.$router.push('/view')
+                    }).catch(error => {
+                        console.log(error)
+                        alert(error);
+                    });
+                }
 
             },
-            esPostulante(id){
-                for (let index = 0; index < this.proyect.postulantes.length; index++) {
-                    if (id == this.proyect.postulantes[index]) {
-                        return true;
-                    }
-                }
-                return false;
-            },
-            updated(){
-                if (this.usuario.idProyecto == '' || this.usuario.idProyecto == undefined ) {
-                    this.$router.push('/home');
-                }
+            //Metodo que devuelve el estado actual de los postulados
+            estadoActual(arreglo){
+                return arreglo.find(user => user.id === this.proyect._id).estado;
             }
-            
+                       
         }    
     }
 </script>

@@ -11,37 +11,17 @@ const app = express();
 //RUTAS
 const userAPI = require('../backend/routes/user.route');
 const proyectAPI = require('../backend/routes/proyect.route');
-//const pruebaAPI = require('../backend/routes/api.route');
-//const permissionAPI = require('../backend/routes/permission.route');
-//const platformAPI = require('../backend/routes/platform.route');
-//const rolAPI = require('../backend/routes/rol.route');
-//const tableAPI = require('../backend/routes/table.route');
-
 
 //Configuracion bodyParser
 app.use(bodyParser.urlencoded({
   extended:true
 }));app.use(bodyParser.json());
 
-/*
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
-*/
-// Cors
 app.use(cors());
 
 // API
 app.use('/api', userAPI)
 app.use('/api', proyectAPI)
-//app.use('/api', permissionAPI)
-//app.use('/api', platformAPI)
-//app.use('/api', rolAPI)
-//app.use('/api', proyetableAPIctAPI)
-//Prueba 
-//app.use('/api2', pruebaAPI)
-//app.use('/faker', fakers)
 
 // Create port
 const port = process.env.PORT || 3000;

@@ -69,7 +69,13 @@ import axios from "axios";
                     this.usuario.proyectosPostulados == []) {
                         this.usuario.proyectosPostulados = [];
                     }
-                    this.usuario.proyectosPostulados.push(this.proyect._id);
+                    //Pusheamos un objeto
+                    this.usuario.proyectosPostulados.push(
+                        {
+                            id : this.proyect._id ,
+                            estado : 'En espera'
+                        }
+                    );
                     //alert(this.usuario.proyectosPostulados);
                     this.actualizarIDPostulante();
                 }).catch(error => {
@@ -81,7 +87,6 @@ import axios from "axios";
                 this.proyect.postulantes.push(this.usuario._id);  
                 this.handleUpdateForm();
             },
-
             actualizarIDPostulante() {
                 let apiURL = `http://localhost:3000/api/update-user/`+ this.usuario._id;
                 axios.post(apiURL, this.usuario).then((res) => {

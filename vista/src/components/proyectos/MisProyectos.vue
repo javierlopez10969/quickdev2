@@ -11,10 +11,8 @@
         <div>
           Proyectos postulados
             <row v-for="proyect in usuario.proyectosPostulados" :key="proyect._id">
-              <br>{{proyect}}
+              <br>ID  : {{proyect.id}} Estado : {{proyect.estado}}
             </row>
-            <br> Proyectos: 
-            {{Proyectos}}
       </div>
         <row v-for="proyect in Proyects" :key="proyect._id">
             <Posit 
@@ -36,7 +34,6 @@
             return{
                 usuario: {},
                 Proyects: [],
-                Proyectos: [],
                 page:1,
                 perPage:10,
                 pages: []
@@ -46,9 +43,10 @@
 
         },
         methods: {
+            //Metodo que permite saber si ese proyecto ha postulado el especialista o no
             isInside(id){
                 for (let index = 0; index < this.usuario.proyectosPostulados.length; index++) {
-                    if (id==this.usuario.proyectosPostulados[index]) {
+                    if (id==this.usuario.proyectosPostulados[index].id) {
                         return true
                     }
                 }

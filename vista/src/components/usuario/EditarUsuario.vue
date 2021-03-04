@@ -14,19 +14,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Phone</label>
+                    <label>Phoneeeeeee</label>
                     <input type="text" class="form-control" v-model="user.phone" required>
                 </div>
-
-                <label>Género </label>
-                <div class="form-group input-group rounded-pill">
-                    
-                    <select class="form-control rounded-pill " v-model="user.gender" required placeholder="Seleccionar tipo de prec" >
-                        <option>Hombre</option>
-                        <option>Mujer</option>
-                    </select>
-                </div>
-
                 <div class="form-group">
                     <button class="btn btn-danger btn-block">Actualizar</button>
                 </div>
@@ -53,6 +43,7 @@ export default {
     methods: {
         handleUpdateForm() {
             let apiURL = `http://localhost:3000/api/update-user/${this.$route.params.id}`;
+            //this.user.proyectosPostulados.splice(0,1);
             axios.post(apiURL, this.user).then((res) => {
                 console.log(res)
                // this.$router.push('/view')
