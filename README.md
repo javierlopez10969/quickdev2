@@ -15,7 +15,7 @@ Una vez instalado los paquetes necesarios podrá ejecutar el programa, debera le
 
 Comando en carpeta Backend :
 
-npm run build
+npm run dev
 
 Comanddo en carpeta vista : 
 
