@@ -12,14 +12,19 @@ pipeline {
                 echo 'Testing..'
             }
         }
-          stage('SCM') {
-            git 'https://github.com/foo/bar.git'
-          }
-          stage('SonarQube analysis') {
-            withSonarQubeEnv() { // Will pick the global server connection you have configured
-              sh './gradlew sonarqube'
+         stage('Sonarqube') {
+            environment {
+                scannerHome = tool 'sonarqube'
             }
-          }
+            steps {
+                withSonarQubeEnv('sonarqube') {
+                    sh "${scannerHome}/bin/sonar-scanner"
+                }
+                timeout(time: 10, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
